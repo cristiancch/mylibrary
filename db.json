@@ -1,0 +1,94 @@
+{
+  "books": [
+    {
+      "id": 0,
+      "title": "Titlul cartii 1",
+      "author": "Autorul cartii 1",
+      "details": "detaliile despre cartea 1",
+      "ISBN": "ISBN code 1",
+      "price": 55,
+      "category": "Afaceri",
+      "readedStatus": false
+    },
+    {
+      "id": 1,
+      "title": "Titlul cartii 2",
+      "author": "Autorul cartii 2",
+      "details": "detaliile despre cartea 2",
+      "ISBN": "ISBN code 2",
+      "price": 65,
+      "category": "Beletristica",
+      "readedStatus": false
+    },
+    {
+      "id": 2,
+      "title": "Titlul cartii 3",
+      "author": "Autorul cartii 3",
+      "details": "detaliile despre cartea 3",
+      "ISBN": "ISBN code 3",
+      "price": 55.5,
+      "category": "Biografii",
+      "readedStatus": true
+    },
+    {
+      "id": 3,
+      "title": "Titlul cartii 4",
+      "author": "Autorul cartii 4",
+      "details": "detaliile despre cartea 4",
+      "ISBN": "ISBN code 4",
+      "price": 654,
+      "category": "Dictionare",
+      "readedStatus": true
+    },
+    {
+      "id": 4,
+      "title": "Titlul cartii 5",
+      "author": "Autorul cartii 5",
+      "details": "detaliile despre cartea 5",
+      "ISBN": "ISBN code 5",
+      "price": 65.4,
+      "category": "Psihologie",
+      "readedStatus": false
+    },
+    {
+      "id": 5,
+      "title": "Titlul cartii 6",
+      "author": "Autorul cartii 6",
+      "details": "detaliile despre cartea 6",
+      "ISBN": "ISBN code 6",
+      "price": 654,
+      "category": "Dictionare",
+      "readedStatus": false
+    },
+    {
+      "id": 6,
+      "title": "Titlul cartii 7",
+      "author": "Autorul cartii 7",
+      "details": "detaliile despre cartea 7",
+      "ISBN": "ISBN code 7",
+      "price": 65,
+      "category": "Beletristica",
+      "readedStatus": true
+    },
+    {
+      "id": 7,
+      "title": "Titlul cartii 8",
+      "author": "Autorul cartii 8",
+      "details": "detaliile despre cartea 8",
+      "ISBN": "ISBN code 8",
+      "price": 55,
+      "category": "Afaceri",
+      "readedStatus": false
+    },
+    {
+      "id": 8,
+      "title": "Titlul cartii 9",
+      "author": "Autorul cartii 9",
+      "details": "detaliile despre cartea 9",
+      "ISBN": "ISBN code 9",
+      "price": 55,
+      "category": "Afaceri",
+      "readedStatus": true
+    }
+  ]
+}

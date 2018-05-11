@@ -1,0 +1,80 @@
+$navy: #042E60;
+$pacific-blue: #0099DC;
+$sky-blue: #00AAF2;
+$maya-blue: #60CFFF;
+$light-blue: #ebf3f6;
+$dark-green: #005952;
+$green: #009900;
+$dark-goldenrod: #b26b00;
+$purple: #63428C;
+$red: #E31B23;
+$dusty-gray: #999999;
+$davy-gray: #555555;
+$silver: #cccccc;
+$white: #ffffff;
+$dark-gray: #373942;
+$gray: #808080;
+
+/*Backgrounds*/
+$solitude: #F2F4F7;
+$white-ice: #E5F5FB;
+$tranquil: #F2F7F6;
+$purple-chalk: #EFECF3;
+$white: #ffffff;
+$jupiter-blue: #ebf3f6;
+
+.bg-navy{
+  background-color: $navy;
+}
+
+.bg-pacific-blue{
+  background-color: $pacific-blue;
+}
+
+.bg-sky-blue{
+  background-color: $sky-blue;
+}
+
+.bg-maya-blue{
+  background-color: $maya-blue;
+}
+
+.bg-light-blue{
+  background-color: $light-blue;
+}
+
+.bg-silver {
+  background-color: $silver;
+}
+
+.bg-dusty-gray{
+  background-color: $dusty-gray;
+}
+
+.bg-white-ice{
+  background-color: $white-ice;
+}
+
+.bg-white {
+  background-color: $white;
+}
+
+.bg-jupiter-blue{
+  background-color: $jupiter-blue;
+}
+
+.active-color {
+  color: $green;
+}
+
+.in-active-color {
+  color: $dark-goldenrod;
+}
+
+.review-color {
+  color: $sky-blue;
+}
+
+.navy-color{
+  color: $navy;
+}
