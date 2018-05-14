@@ -28,7 +28,7 @@
       "ISBN": "ISBN code 3",
       "price": 55.5,
       "category": "Biografii",
-      "readedStatus": true
+      "readedStatus": false
     },
     {
       "id": 3,

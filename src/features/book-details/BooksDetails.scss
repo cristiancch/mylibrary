@@ -16,13 +16,13 @@ img {
   padding-left: 15px;
   padding-top: 15px;
   display: block;
-  float: left;
   padding-right: 15px;
 }
 
 .container {
   padding: 2px 16px;
   width: 50%;
+  display: inline-block;
 }
 
 .allCards {
@@ -34,4 +34,8 @@ img {
   position: relative;
   bottom: 20px;
   right: 10px;
+}
+
+h4, h5, h6 {
+  display: none;
 }

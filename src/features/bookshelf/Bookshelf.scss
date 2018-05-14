@@ -23,9 +23,14 @@ img {
 .container {
   padding: 2px 16px;
   width: 50%;
+
 }
 
 .allCards {
   display: grid;
   width: 50%;
+}
+
+h2 {
+  display: none;
 }

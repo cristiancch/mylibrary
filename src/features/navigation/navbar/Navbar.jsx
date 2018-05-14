@@ -8,18 +8,11 @@ export default class Navbar extends React.Component {
 
     constructor(props) {
         super(props);
-        /* this.state = {
-             searchedTerm: '',
-         };
- */
         this.bookSearch = this.bookSearch.bind(this);
         this.getBookCategory = this.getBookCategory.bind(this);
     }
 
     bookSearch(book) {
-        /*this.setState({
-            searchedTerm: book,
-        });*/
         this.props.onSearchBook(book);
     }
 
@@ -29,10 +22,13 @@ export default class Navbar extends React.Component {
 
     render() {
         return (
-            <nav className="navbar">
-                <div className="container">
+            <header>
+                <nav className="navbar">
+                    <h2>Navbar</h2>
                     <a href="/">
-                        <img className="logo" src="/src/assets/images/logo.png"/>
+                        <figure>
+                            <img className="logo" src="/src/assets/images/logo.png"/>
+                        </figure>
                     </a>
                     <ul className="nav nav-right">
                         <li><Link to="/allBooks" href="/allBooks">AllBooks</Link></li>
@@ -40,8 +36,8 @@ export default class Navbar extends React.Component {
                         <BookCategoryBtn onBookCategory={this.getBookCategory}/>
                         <SearchBar onSearchTermChanged={this.bookSearch}/>
                     </ul>
-                </div>
-            </nav>
+                </nav>
+            </header>
         );
     }
 }

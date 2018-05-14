@@ -4,21 +4,10 @@ import Bookshelf from "../bookshelf/Bookshelf";
 
 export default class Wishlist extends React.Component {
 
-    constructor(props) {
-        super(props);
-
-        this.getLocalStorage = this.getLocalStorage.bind(this);
-    }
-
-    getLocalStorage() {
-        let books = getWishlistFromLocalStorage();
-        console.log('Books -> ', books);
-    }
-
     render() {
         return (
-            <div>
-                {this.getLocalStorage()}
+            <nav>
+                <h2>All cards from wishlist</h2>
                 {getWishlistFromLocalStorage() ? (
                     <Bookshelf
                         books={getWishlistFromLocalStorage()}
@@ -27,7 +16,7 @@ export default class Wishlist extends React.Component {
                 ) : (
                     <h1>No books in wishlist..</h1>
                 )}
-            </div>
+            </nav>
         );
     }
 }

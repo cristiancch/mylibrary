@@ -1,18 +1,16 @@
 import React from 'react';
 import './Bookshelf.scss';
 import BookDetails from "../book-details/BookDetails";
-import {addReadedBooksToLocalStorage, getReadedBooksFromLocalStorage} from "../../helpers/localStorageTransformer";
 
 export default class Bookshelf extends React.Component {
-
 
     render() {
 
         let books = this.props.books;
-        /*addReadedBooksToLocalStorage(books);*/
 
         return (
-            <div className="allCards">
+            <nav className="allCards">
+                <h2>All cards</h2>
                 {books.map((book, index) =>
                     (this.props.category) ? (
                         (this.props.category.toLowerCase() === book.category.toLowerCase()) ? (
@@ -23,7 +21,6 @@ export default class Bookshelf extends React.Component {
                                 key={index}
                                 fromBookshelf={true}
                                 fromWishlist={this.props.fromWishlist}
-                                // category={this.props.category}
                             />
                         ) : (null)
                     ) : (
@@ -34,14 +31,10 @@ export default class Bookshelf extends React.Component {
                             key={index}
                             fromBookshelf={true}
                             fromWishlist={this.props.fromWishlist}
-                            // category={this.props.category}
                         />
                     )
                 )}
-            </div>
+            </nav>
         );
-
-
     }
-
 }

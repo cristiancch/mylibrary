@@ -1,5 +1,4 @@
 import React from 'react';
-import {modifyReadedStatus} from "../../helpers/localStorageTransformer";
 import {updateDB} from "../../helpers/jsonServerTransformer";
 
 export default class BookReadedStatus extends React.Component {
@@ -14,26 +13,26 @@ export default class BookReadedStatus extends React.Component {
 
     render() {
         return (
-            //in bookDetails add style for readedStatus_btn
             (this.props.readedStatus) ? (
-                <img
-                    className="readedStatus_btn"
-                    src="/src/assets/images/readed-icon.png"
-                    onClick={() => this.handleReadedClick(this.props.book)}
-                />
+                <figure>
+                    <img
+                        src="/src/assets/images/readed-icon.png"
+                        onClick={() => this.handleReadedClick(this.props.book)}
+                    />
+                </figure>
             ) : (
-                <img
-                    className="readedStatus_btn"
-                    src="/src/assets/images/notReaded-icon.png"
-                    onClick={() => this.handleNotReadedClick(this.props.book)}
-                />
+                <figure>
+                    <img
+                        src="/src/assets/images/notReaded-icon.png"
+                        onClick={() => this.handleNotReadedClick(this.props.book)}
+                    />
+                </figure>
             )
         );
     }
 
     handleReadedClick(book) {
         console.log('readed: ', book.readedStatus, ', param sent:, true');
-        // modifyReadedStatus(book, false);
         book.readedStatus = false;
         updateDB(book);
         this.props.onReadedStatusChanged(false);
@@ -41,7 +40,6 @@ export default class BookReadedStatus extends React.Component {
 
     handleNotReadedClick(book) {
         console.log('readed: ', book.readedStatus, ', param sent:, false');
-        //modifyReadedStatus(book, true);
         book.readedStatus = true;
         updateDB(book);
         this.props.onReadedStatusChanged(true);

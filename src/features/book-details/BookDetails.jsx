@@ -13,22 +13,13 @@ export default class BookDetails extends React.Component {
             books: [],
             isRead: false
         };
-
         this.getWishlist = this.getWishlist.bind(this);
         this.onReadedStatusChanged = this.onReadedStatusChanged.bind(this);
     }
 
-
     render() {
 
         let books = this.props.books;
-
-        // let books;
-        //
-        // if (getReadedBooksFromLocalStorage())
-        //     books = getReadedBooksFromLocalStorage();
-
-        //TODO sa afiseze daca nu este gasita cartea + query mai avansat de cautare
 
         if (books.length || this.props.toSearch) {
 
@@ -46,12 +37,15 @@ export default class BookDetails extends React.Component {
                 let categoryURL = '/category/' + book.category.toLowerCase();
 
                 return (
-                    <div className="allCards">
-                        <div className="card">
-                            {this.props.fromWishlist ? (
-                                <div>
-                                    <img src="/src/assets/images/book-cover-placeholder.png"/>
-                                    <div className="container">
+                    <section className="card">
+                        <h4>Card section</h4>
+                        {this.props.fromWishlist ? (
+                            <section>
+                                <h5>Card subsection</h5>
+                                <figure><img src="/src/assets/images/book-cover-placeholder.png"/></figure>
+                                <section className="container">
+                                    <h6>Container section</h6>
+                                    <header>
                                         <ul key={book.id}>
                                             <li>Title: {book.title}</li>
                                             <li>Author: {book.author}</li>
@@ -60,19 +54,23 @@ export default class BookDetails extends React.Component {
                                             <li>Price: {book.price}</li>
                                             <li>Category: {book.category}</li>
                                         </ul>
-                                        <RemoveFromWishlistBtn book={book}/>
-                                        <BookReadedStatus
-                                            readedStatus={book.readedStatus}
-                                            book={book}
-                                            onReadedStatusChanged={this.onReadedStatusChanged}
-                                        />
-                                    </div>
+                                    </header>
+                                    <RemoveFromWishlistBtn book={book}/>
+                                    <BookReadedStatus
+                                        readedStatus={book.readedStatus}
+                                        book={book}
+                                        onReadedStatusChanged={this.onReadedStatusChanged}
+                                    />
                                     <Link to={url} href={url}>Details..</Link>
-                                </div>
-                            ) : (
-                                <div>
-                                    <img src="/src/assets/images/book-cover-placeholder.png"/>
-                                    <div className="container">
+                                </section>
+                            </section>
+                        ) : (
+                            <section>
+                                <h5>Card subsection</h5>
+                                <figure><img src="/src/assets/images/book-cover-placeholder.png"/></figure>
+                                <section className="container">
+                                    <h6>Container section</h6>
+                                    <header>
                                         <ul key={book.id}>
                                             <li>Title: {book.title}</li>
                                             <li>Author: {book.author}</li>
@@ -86,20 +84,21 @@ export default class BookDetails extends React.Component {
                                                 </Link>
                                             </li>
                                         </ul>
-                                        <AddToWishlistBtn book={book}
-                                                          wishlistBooks={this.getWishlist}
-                                        />
-                                        <BookReadedStatus
-                                            readedStatus={book.readedStatus}
-                                            book={book}
-                                            onReadedStatusChanged={this.onReadedStatusChanged}
-                                        />
-                                    </div>
+                                    </header>
+                                    <AddToWishlistBtn book={book}
+                                                      wishlistBooks={this.getWishlist}
+                                    />
+                                    <BookReadedStatus
+                                        readedStatus={book.readedStatus}
+                                        book={book}
+                                        onReadedStatusChanged={this.onReadedStatusChanged}
+                                    />
                                     < Link to={url} href={url}>Details..</Link>
-                                </div>
-                            )}
-                        </div>
-                    </div>
+                                </section>
+                            </section>
+                        )}
+                    </section>
+
                 );
             } else {
                 return (null);
@@ -120,5 +119,4 @@ export default class BookDetails extends React.Component {
             isRead: status
         });
     }
-
 }
