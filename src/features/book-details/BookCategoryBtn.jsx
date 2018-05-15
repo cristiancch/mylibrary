@@ -13,7 +13,7 @@ export default class BookCategoryBtn extends React.Component {
         return (
             <div className="dropdown">
                 <button className="dropbtn">Category</button>
-                <div className="dropdown-content">
+                <div className="dropdown__content">
                     <Link to="/category/afaceri"
                           href="/category/afaceri"
                           onClick={() => this.handleClick('afaceri')}>Afaceri

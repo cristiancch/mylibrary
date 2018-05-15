@@ -14,19 +14,15 @@ export default class BookReadedStatus extends React.Component {
     render() {
         return (
             (this.props.readedStatus) ? (
-                <figure>
-                    <img
-                        src="/src/assets/images/readed-icon.png"
-                        onClick={() => this.handleReadedClick(this.props.book)}
-                    />
-                </figure>
+                <img
+                    src="/src/assets/images/readed-icon.png"
+                    onClick={() => this.handleReadedClick(this.props.book)}
+                />
             ) : (
-                <figure>
-                    <img
-                        src="/src/assets/images/notReaded-icon.png"
-                        onClick={() => this.handleNotReadedClick(this.props.book)}
-                    />
-                </figure>
+                <img
+                    src="/src/assets/images/notReaded-icon.png"
+                    onClick={() => this.handleNotReadedClick(this.props.book)}
+                />
             )
         );
     }

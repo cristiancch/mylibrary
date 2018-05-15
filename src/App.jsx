@@ -21,7 +21,6 @@ export default class App extends Component {
         };
 
         this.searchBook = this.searchBook.bind(this);
-        //this.getWishlist = this.getWishlist.bind(this);
         this.getBookCategory = this.getBookCategory.bind(this);
     }
 
@@ -34,7 +33,8 @@ export default class App extends Component {
 
     render() {
         return (
-            <div>
+            <section>
+                <h1 style={{display: 'none'}}>Main content</h1>
                 <Navbar
                     onSearchBook={this.searchBook}
                     onBookCategory={this.getBookCategory}
@@ -53,22 +53,16 @@ export default class App extends Component {
                                render={(props) =>
                                    <Bookshelf
                                        {...props}
-                                       /*books={getReadedBooksFromLocalStorage() ? (
-                                           getReadedBooksFromLocalStorage()
-                                       ) : (this.state.books)}*/
                                        books={this.state.books}
                                        bookToSearch={this.state.bookToBeSearched}
-                                       /* category={this.state.category}*/
                                    />}
                         />
                         <Route path='/category/:id'
                                render={(props) =>
                                    <Bookshelf
                                        {...props}
-                                       // books={getReadedBooksFromLocalStorage()}
                                        books={this.state.books}
                                        category={props.match.params.id}
-                                       /* category={this.state.category}*/
                                    />}
                         />
                         <Route path='/bookDetail/:id'
@@ -78,7 +72,6 @@ export default class App extends Component {
                                        books={this.state.books}
                                        id={props.match.params.id}
                                        toSearch={this.state.bookToBeSearched}
-                                       //onReceiveBooks={this.getWishlist}
                                    />}
                         />
                         <Route path='/wishlist'
@@ -92,17 +85,9 @@ export default class App extends Component {
                     </Switch>
                 </div>
                 <Footer/>
-            </div>
+            </section>
         );
     }
-
-    /*getWishlist(books) {
-        this.setState(previousState => ({
-            wishlist: [...previousState.wishlist, books]
-        }));
-
-        console.log('Books received in App, size is ', this.state.wishlist.length);
-    }*/
 
     searchBook(book) {
         this.setState({
@@ -116,5 +101,4 @@ export default class App extends Component {
             category: category
         });
     }
-
 }

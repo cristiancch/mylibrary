@@ -2,11 +2,12 @@
   "books": [
     {
       "id": 0,
-      "title": "Titlul cartii 1",
-      "author": "Autorul cartii 1",
-      "details": "detaliile despre cartea 1",
+      "title": "Zero limite",
+      "author": "Joe Vitale",
+      "details": "Principiul cel mai important din carte, pe care se bazează şi tehnica, e că noi suntem responsabili pentru tot ceea ce trăim şi întâlnim în calea noastră.",
       "ISBN": "ISBN code 1",
-      "price": 55,
+      "cover": "ZeroLimite-JoeVitale.jpg",
+      "price": 22.88,
       "category": "Afaceri",
       "readedStatus": false
     },
@@ -17,6 +18,7 @@
       "details": "detaliile despre cartea 2",
       "ISBN": "ISBN code 2",
       "price": 65,
+      "cover": "book-cover-placeholder.png",
       "category": "Beletristica",
       "readedStatus": false
     },
@@ -27,6 +29,7 @@
       "details": "detaliile despre cartea 3",
       "ISBN": "ISBN code 3",
       "price": 55.5,
+      "cover": "book-cover-placeholder.png",
       "category": "Biografii",
       "readedStatus": false
     },
@@ -37,6 +40,7 @@
       "details": "detaliile despre cartea 4",
       "ISBN": "ISBN code 4",
       "price": 654,
+      "cover": "book-cover-placeholder.png",
       "category": "Dictionare",
       "readedStatus": true
     },
@@ -47,6 +51,7 @@
       "details": "detaliile despre cartea 5",
       "ISBN": "ISBN code 5",
       "price": 65.4,
+      "cover": "book-cover-placeholder.png",
       "category": "Psihologie",
       "readedStatus": false
     },
@@ -57,6 +62,7 @@
       "details": "detaliile despre cartea 6",
       "ISBN": "ISBN code 6",
       "price": 654,
+      "cover": "book-cover-placeholder.png",
       "category": "Dictionare",
       "readedStatus": false
     },
@@ -67,6 +73,7 @@
       "details": "detaliile despre cartea 7",
       "ISBN": "ISBN code 7",
       "price": 65,
+      "cover": "book-cover-placeholder.png",
       "category": "Beletristica",
       "readedStatus": true
     },
@@ -77,6 +84,7 @@
       "details": "detaliile despre cartea 8",
       "ISBN": "ISBN code 8",
       "price": 55,
+      "cover": "book-cover-placeholder.png",
       "category": "Afaceri",
       "readedStatus": false
     },
@@ -87,6 +95,7 @@
       "details": "detaliile despre cartea 9",
       "ISBN": "ISBN code 9",
       "price": 55,
+      "cover": "book-cover-placeholder.png",
       "category": "Afaceri",
       "readedStatus": true
     }

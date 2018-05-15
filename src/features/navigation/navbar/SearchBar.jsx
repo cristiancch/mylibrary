@@ -5,7 +5,7 @@ export default class SearchBar extends React.Component {
 
     constructor(props) {
         super(props);
-        this.onInputTextChange = debounce(800, this.onInputTextChange);
+        this.onInputTextChange = debounce(200, this.onInputTextChange);
     }
 
     render() {

@@ -4,6 +4,8 @@ import AddToWishlistBtn from '../wishlist/AddToWishlistBtn';
 import Link from "react-router-dom/es/Link";
 import RemoveFromWishlistBtn from "../wishlist/RemoveFromWishlistBtn";
 import BookReadedStatus from "./BookReadedStatus";
+import ShowMoreDetails from './ShowMoreDetails';
+import NoBookFound from "./NoBookFound";
 
 export default class BookDetails extends React.Component {
 
@@ -20,13 +22,12 @@ export default class BookDetails extends React.Component {
     render() {
 
         let books = this.props.books;
-
         if (books.length || this.props.toSearch) {
 
             let book = books[this.props.id];
 
             if (this.props.toSearch) {
-                if (!(this.props.toSearch.toLowerCase() === books[this.props.id].title.toLowerCase())) {
+                if (book.title.toLowerCase().indexOf(this.props.toSearch.toLowerCase()) === -1) {
                     book = '';
                 }
             }
@@ -37,54 +38,61 @@ export default class BookDetails extends React.Component {
                 let categoryURL = '/category/' + book.category.toLowerCase();
 
                 return (
-                    <section className="card">
+                    <section className="card card--hover">
                         <h4>Card section</h4>
                         {this.props.fromWishlist ? (
-                            <section>
+                            <div>
                                 <h5>Card subsection</h5>
-                                <figure><img src="/src/assets/images/book-cover-placeholder.png"/></figure>
+                                <img
+                                    className="bookCover"
+                                    src={"/src/assets/images/book-covers/" + book.cover}/>
                                 <section className="container">
                                     <h6>Container section</h6>
-                                    <header>
-                                        <ul key={book.id}>
-                                            <li>Title: {book.title}</li>
-                                            <li>Author: {book.author}</li>
-                                            <li>Details: {book.details}</li>
-                                            <li>ISBN: {book.ISBN}</li>
-                                            <li>Price: {book.price}</li>
-                                            <li>Category: {book.category}</li>
-                                        </ul>
-                                    </header>
+                                    <ul key={book.id}>
+                                        <li>Title: {book.title}</li>
+                                        <li>Author: {book.author}</li>
+                                        <li>ISBN: {book.ISBN}</li>
+                                        <li>Price: {book.price}</li>
+                                        <li>Category:
+                                            <Link to={categoryURL}
+                                                  href={categoryURL}
+                                                  onClick={() => this.handleClick('dictionare')}> {book.category}
+                                            </Link>
+                                        </li>
+                                        <li><ShowMoreDetails book={book}/></li>
+                                        <li><Link to={url} href={url}>Details..</Link></li>
+                                    </ul>
                                     <RemoveFromWishlistBtn book={book}/>
                                     <BookReadedStatus
                                         readedStatus={book.readedStatus}
                                         book={book}
                                         onReadedStatusChanged={this.onReadedStatusChanged}
                                     />
-                                    <Link to={url} href={url}>Details..</Link>
                                 </section>
-                            </section>
+                            </div>
                         ) : (
-                            <section>
+                            <div>
                                 <h5>Card subsection</h5>
-                                <figure><img src="/src/assets/images/book-cover-placeholder.png"/></figure>
+                                <img
+                                    className="bookCover"
+                                    src={"/src/assets/images/book-covers/" + book.cover}/>
                                 <section className="container">
                                     <h6>Container section</h6>
-                                    <header>
-                                        <ul key={book.id}>
-                                            <li>Title: {book.title}</li>
-                                            <li>Author: {book.author}</li>
-                                            <li>Details: {book.details}</li>
-                                            <li>ISBN: {book.ISBN}</li>
-                                            <li>Price: {book.price}</li>
-                                            <li>
-                                                <Link to={categoryURL}
-                                                      href={categoryURL}
-                                                      onClick={() => this.handleClick('dictionare')}>Category: {book.category}
-                                                </Link>
-                                            </li>
-                                        </ul>
-                                    </header>
+                                    <ul key={book.id}>
+                                        <li>Title: {book.title}</li>
+                                        <li>Author: {book.author}</li>
+                                        <li>ISBN: {book.ISBN}</li>
+                                        <li>Price: {book.price}</li>
+                                        <li>Category:
+                                            <Link to={categoryURL}
+                                                  href={categoryURL}
+                                                  onClick={() => this.handleClick('dictionare')}> {book.category}
+                                            </Link>
+                                        </li>
+                                        <li><ShowMoreDetails book={book}/></li>
+                                        <li>< Link to={url} href={url}>Details..</Link>
+                                        </li>
+                                    </ul>
                                     <AddToWishlistBtn book={book}
                                                       wishlistBooks={this.getWishlist}
                                     />
@@ -93,12 +101,11 @@ export default class BookDetails extends React.Component {
                                         book={book}
                                         onReadedStatusChanged={this.onReadedStatusChanged}
                                     />
-                                    < Link to={url} href={url}>Details..</Link>
+
                                 </section>
-                            </section>
+                            </div>
                         )}
                     </section>
-
                 );
             } else {
                 return (null);

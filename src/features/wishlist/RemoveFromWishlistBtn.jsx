@@ -13,14 +13,11 @@ export default class RemoveFromWishlistBtn extends React.Component {
     render() {
         return (
             <Link to='/wishlist/' href='/wishlist/'>
-                <figure>
-                    <img
-                        src="/src/assets/images/remove_wishlist-icon.png"
-                        onClick={() => this.handleClick(this.props.book)}
-                    />
-                </figure>
+                <img
+                    src="/src/assets/images/remove_wishlist-icon.png"
+                    onClick={() => this.handleClick(this.props.book)}
+                />
             </Link>
-
         );
     }
 

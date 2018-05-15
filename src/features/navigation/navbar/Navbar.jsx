@@ -26,11 +26,9 @@ export default class Navbar extends React.Component {
                 <nav className="navbar">
                     <h2>Navbar</h2>
                     <a href="/">
-                        <figure>
                             <img className="logo" src="/src/assets/images/logo.png"/>
-                        </figure>
                     </a>
-                    <ul className="nav nav-right">
+                    <ul className="nav">
                         <li><Link to="/allBooks" href="/allBooks">AllBooks</Link></li>
                         <li><Link to="/wishlist" href="/wishlist">Wishlist</Link></li>
                         <BookCategoryBtn onBookCategory={this.getBookCategory}/>

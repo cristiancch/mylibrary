@@ -4,7 +4,7 @@ import './Footer.scss';
 const Footer = () =>
     (
         <footer className="navbar navbar-expand">
-            <nav className="navbar-nav">
+            <nav className="navbar__nav">
                 <h2>Footer</h2>
                 <ul>
                     <li className="nav-item pr-5">
