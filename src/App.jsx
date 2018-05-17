@@ -7,6 +7,7 @@ import Switch from "react-router-dom/es/Switch";
 import Bookshelf from "./features/bookshelf/Bookshelf";
 import Wishlist from "./features/wishlist/Wishlist";
 import Route from "react-router-dom/es/Route";
+import AddNewBookModal from "./features/addNewBook/AddNewBookModal";
 
 export default class App extends Component {
 
@@ -17,11 +18,13 @@ export default class App extends Component {
             routeId: 0,
             bookToBeSearched: '',
             wishlist: [],
-            category: ''
+            category: '',
+            bookAdded: []
         };
 
         this.searchBook = this.searchBook.bind(this);
         this.getBookCategory = this.getBookCategory.bind(this);
+        this.onNewBookAdded = this.onNewBookAdded.bind(this);
     }
 
     componentDidMount() {
@@ -87,6 +90,13 @@ export default class App extends Component {
                 <Footer/>
             </section>
         );
+    }
+
+    onNewBookAdded(book) {
+        console.log('Book added', book);
+        this.setState({
+            bookAdded: book
+        });
     }
 
     searchBook(book) {

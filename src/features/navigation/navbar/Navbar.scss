@@ -91,6 +91,12 @@ h2 {
   display: none;
 }
 
+button {
+  border: none;
+  background-color: white;
+  font-size: 17px;
+}
+
 /* responsive */
 @media screen and (max-width: 677px) {
   .navbar {

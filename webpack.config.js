@@ -22,7 +22,7 @@ module.exports = {
             path.resolve(__dirname, 'src'),
             path.resolve(__dirname, 'node_modules'),
         ],
-        extensions: ['.js', '.jsx', '.scss'],
+        extensions: ['.js', '.jsx', '.scss', '.jpg', '.jpeg', '.png'],
     },
     mode: 'development',
     plugins: [

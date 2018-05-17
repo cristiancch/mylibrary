@@ -45,7 +45,7 @@ export default class BookDetails extends React.Component {
                                 <h5>Card subsection</h5>
                                 <img
                                     className="bookCover"
-                                    src={"/src/assets/images/book-covers/" + book.cover}/>
+                                    src={book.cover}/>
                                 <section className="container">
                                     <h6>Container section</h6>
                                     <ul key={book.id}>
@@ -75,7 +75,7 @@ export default class BookDetails extends React.Component {
                                 <h5>Card subsection</h5>
                                 <img
                                     className="bookCover"
-                                    src={"/src/assets/images/book-covers/" + book.cover}/>
+                                    src={book.cover}/>
                                 <section className="container">
                                     <h6>Container section</h6>
                                     <ul key={book.id}>

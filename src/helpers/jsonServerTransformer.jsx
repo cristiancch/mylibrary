@@ -13,6 +13,20 @@ export function updateDB(book) {
     }).then((res) => console.log(res));
 }
 
+export function addToDB(book) {
+
+    console.log('Book to be added: ', book);
+
+    fetch('http://localhost:3000/books', {
+        "body": JSON.stringify(book),
+        "headers": {
+            "Accept": "application/json",
+            "Content-type": "application/json"
+        },
+        "method": "POST"
+    }).then((res) => console.log(res));
+}
+
 export function getDB() {
     axios.get('http://localhost:3000/books')
         .then(res => {
