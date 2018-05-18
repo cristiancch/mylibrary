@@ -12,7 +12,7 @@ export default class Navbar extends React.Component {
         super(props);
         this.bookSearch = this.bookSearch.bind(this);
         this.getBookCategory = this.getBookCategory.bind(this);
-       // this.getNewBook = this.getNewBook.bind(this);
+        // this.getNewBook = this.getNewBook.bind(this);
     }
 
     bookSearch(book) {
@@ -23,26 +23,19 @@ export default class Navbar extends React.Component {
         this.props.onBookCategory(category);
     }
 
-   /* getNewBook(book) {
-        console.log('The new book received: ', book);
-
-        addToDB(book);
-        //this.props.onNewBook(book);
-    }*/
-
     render() {
         return (
             <header>
-                <nav className="navbar">
+                <nav className="nav">
                     <h2>Navbar</h2>
-                    <a href="/">
+                    {/* <a href="/">
                         <img className="logo" src="/src/assets/images/logo.png"/>
-                    </a>
-                    <ul className="nav">
-                        <li><Link to="/allBooks" href="/allBooks">AllBooks</Link></li>
-                        <li><Link to="/wishlist" href="/wishlist">Wishlist</Link></li>
-                        <BookCategoryBtn onBookCategory={this.getBookCategory}/>
-                        <li><AddNewBook/></li>
+                    </a>*/}
+                    <ul className="nav__ul">
+                        <li className="nav__li"><Link to="/allBooks" href="/allBooks">AllBooks</Link></li>
+                        <li className="nav__li"><Link to="/wishlist" href="/wishlist">Wishlist</Link></li>
+                        <li className="nav__li"><BookCategoryBtn onBookCategory={this.getBookCategory}/></li>
+                        <li className="nav__li"><AddNewBook/></li>
                         <SearchBar onSearchTermChanged={this.bookSearch}/>
                     </ul>
                 </nav>

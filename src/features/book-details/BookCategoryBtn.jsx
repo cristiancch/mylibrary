@@ -11,9 +11,10 @@ export default class BookCategoryBtn extends React.Component {
 
     render() {
         return (
-            <div className="dropdown">
-                <button className="dropbtn">Category</button>
-                <div className="dropdown__content">
+            <div className="categoryDropdown">
+                <button className="categoryDropdown__dropBtn">Category <i className="fa fa-caret-down"></i>
+                </button>
+                <div className="categoryDropdown__content">
                     <Link to="/category/afaceri"
                           href="/category/afaceri"
                           onClick={() => this.handleClick('afaceri')}>Afaceri

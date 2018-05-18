@@ -1,5 +1,5 @@
 
-input[type=text] {
+.addNewBook__textInput {
   width: 100%;
   padding: 20px;
   margin: 8px;
@@ -7,7 +7,7 @@ input[type=text] {
   border-radius: 4px;
 }
 
-input [type=number] {
+.addNewBook__NumberInput{
   width: 40%;
   padding: 20px;
   margin: 8px;
@@ -27,7 +27,7 @@ input[type="number"]::-webkit-inner-spin-button {
   margin: 0;
 }
 
-textarea {
+.addNewBook__Textarea {
   padding: 10px;
   resize: none;
 }

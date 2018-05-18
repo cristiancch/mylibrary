@@ -161,7 +161,10 @@ export default class AddNewBook extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={this.toggleModal}>Add new Book</button>
+                <button
+                    className="addNewBook__btn"
+                    onClick={this.toggleModal}>Add new Book
+                </button>
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}
@@ -173,6 +176,7 @@ export default class AddNewBook extends React.Component {
                     <form>
                         <label>Title
                             <input
+                                className="addNewBook__textInput"
                                 name="bookTitle"
                                 type="text"
                                 onChange={this.handleInputChange}/>
@@ -180,6 +184,7 @@ export default class AddNewBook extends React.Component {
                         <br/> <br/>
                         <label>Author
                             <input
+                                className="addNewBook__textInput"
                                 name="bookAuthor"
                                 type="text"
                                 onChange={this.handleInputChange}/>
@@ -187,6 +192,7 @@ export default class AddNewBook extends React.Component {
                         <br/> <br/>
                         <label>ISBN
                             <input
+                                className="addNewBook__textInput"
                                 name="bookISBN"
                                 type="text"
                                 onChange={this.handleInputChange}/>
@@ -194,6 +200,7 @@ export default class AddNewBook extends React.Component {
                         <br/> <br/>
                         <label>Price
                             <input
+                                className="addNewBook__NumberInput"
                                 name="bookPrice"
                                 type="number"
                                 onChange={this.handleInputChange}/>
@@ -209,10 +216,12 @@ export default class AddNewBook extends React.Component {
                             </select>
                         </label>
                         <br/> <br/>
-                        <textarea name="bookDescription"
-                                  rows="10" cols="90" onClick={this.handleInputChange}
-                                  placeholder="Book description">
-                                </textarea>
+                        <textarea
+                            className="addNewBook__Textarea"
+                            name="bookDescription"
+                            rows="10" cols="90" onClick={this.handleInputChange}
+                            placeholder="Book description">
+                        </textarea>
                         <br/> <br/>
                         <input
                             ref="file"

@@ -82,7 +82,7 @@ export default class Bookshelf extends React.Component {
         counter.incrementBy(10);
         console.log('counterValue after increment by 10: ', counter.value());*/
 
-        
+
         return (
             <nav className="allCards">
                 <h2>All cards</h2>

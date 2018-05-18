@@ -10,8 +10,10 @@ export default class SearchBar extends React.Component {
 
     render() {
         return (
-            <input type="text" placeholder="Search by title.."
-                   onChange={event => this.onInputTextChange(event.target.value)}
+            <input
+                className="bookSearchBar"
+                type="text" placeholder="&#x1F50E;"
+                onChange={event => this.onInputTextChange(event.target.value)}
             />
         );
     }
