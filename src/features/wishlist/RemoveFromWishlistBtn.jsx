@@ -15,6 +15,7 @@ export default class RemoveFromWishlistBtn extends React.Component {
             <Link to='/wishlist/' href='/wishlist/'>
                 <img
                     src="/src/assets/images/remove_wishlist-icon.png"
+                    className="wishlist__button"
                     onClick={() => this.handleClick(this.props.book)}
                 />
             </Link>

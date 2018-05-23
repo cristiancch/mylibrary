@@ -1,6 +1,12 @@
 .nav {
-  margin: 10px;
-  padding: 0;
+  left: 9px;
+  right: 9px;
+  top:1px;
+  position: absolute;
+  z-index: 111;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-bottom: 1px solid #f1f1f1;
 }
 
 .nav__ul {
@@ -8,28 +14,30 @@
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
+  background-color: #60656F;
 }
 
 .nav__li {
   float: left;
+  margin: 0;
+  padding: 0;
   border-right: 1px solid #bbb;
   a {
     display: block;
     color: white;
     text-align: center;
-    font-size: 20px;
-    padding: 14px 16px;
+    font-size: 21px;
+    padding: 16px 16px;
     text-decoration: none;
 
     &:hover:not(.active) {
-      background-color: #111;
+      background-color: #131112;
     }
   }
 }
 
 .nav__li--active {
-  background-color: #4CAF50;
+  background-color: #C49991;
 }
 
 .categoryDropdown {
@@ -38,7 +46,7 @@
 }
 
 .categoryDropdown .categoryDropdown__dropBtn {
-  background-color: #333;
+  background-color: #60656F;
   padding: 16px;
   font-size: 20px;
   border: none;
@@ -54,7 +62,7 @@
 .categoryDropdown__content {
   display: none;
   position: absolute;
-  background-color: #333;
+  background-color: #60656F;
   min-width: 160px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   z-index: 1;
@@ -74,7 +82,7 @@
 }
 
 .categoryDropdown__content:hover {
-  background-color: #333;
+  background-color: #60656F;
   position: absolute;
   min-width: 160px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
@@ -86,7 +94,7 @@
 }
 
 .addNewBook__btn {
-  background-color: #333;
+  background-color: #60656F;
   padding: 16px;
   font-size: 20px;
   border: none;
@@ -107,18 +115,18 @@
 
 }
 
-img {
-  padding-right: 10px;
-}
-
 h2 {
   display: none;
 }
 
 /* responsive */
 @media screen and (max-width: 677px) {
-  .navbar {
-    width: 90%;
+  .nav__ul .nav__li:not(:first-child) {
+    display: none;
+  }
+  .bookSearchBar {
+    float: left;
+    display: block;
   }
 }
 

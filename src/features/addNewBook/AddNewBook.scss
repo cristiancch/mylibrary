@@ -7,7 +7,7 @@
   border-radius: 4px;
 }
 
-.addNewBook__NumberInput{
+.addNewBook__NumberInput {
   width: 40%;
   padding: 20px;
   margin: 8px;
@@ -38,4 +38,12 @@ select {
   border: none;
   border-radius: 4px;
   background-color: #f1f1f1;
+}
+
+.form__addNewBook {
+  background-color: rgba(63, 123, 145, 0.75);
+}
+
+.Overlay{
+  opacity: 1;
 }

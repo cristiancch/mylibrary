@@ -33,7 +33,7 @@ export default class ShowMoreDetails extends React.Component {
         return (
             <section>
                 <h1 style={{display: 'none'}}>Boook description section</h1>
-                Description: {this.props.book.details.substr(0, 10) + '..   '}
+                {this.props.book.details.substr(0, 100) + '..   '}
                 <a
                     href={'#!'}
                     ref="target"

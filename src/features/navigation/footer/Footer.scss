@@ -2,9 +2,9 @@
 
 footer {
   &.navbar {
-    position: relative;
-    bottom: 0;
-    height: 20px;
+    position: absolute;
+    bottom: 3px;
+    height: 30px;
     width: 100%;
     justify-content: center;
     font-size: 12px;
@@ -17,7 +17,7 @@ footer {
     ul {
       list-style-type: none;
       margin: 0;
-      padding: 0;
+      padding: 3px;
       overflow: hidden;
     }
     li {
@@ -27,8 +27,9 @@ footer {
       display: block;
       color: black;
       text-align: center;
-      padding: 16px;
+      padding-right: 10px;
       text-decoration: none;
+      font-size: 15px;
     }
   }
 

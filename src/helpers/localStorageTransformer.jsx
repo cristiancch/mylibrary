@@ -35,8 +35,8 @@ export function removeBookFromLocalStorageWishlist(book) {
     let array = [...books];
     let index = array.indexOf(book);
 
-    console.log('copy of books: ', array);
-    console.log('remove book with id ', book.id, ' from index ', index);
+   /* console.log('copy of books: ', array);
+    console.log('remove book with id ', book.id, ' from index ', index);*/
 
     array.splice(index, 1);
 

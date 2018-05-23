@@ -1,9 +1,49 @@
 .allCards {
-  margin: auto;
+  /*  margin: auto;
+    display: grid;
+    width: 90%;
+    max-width: 1240px;;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;*/
+  width: 90%;
+  max-width: 1240px;
+  margin: 0 auto;
   display: grid;
-  width: 50%;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-gap: 20px;
+  alignment: center;
+}
+
+.ReactModal__Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.9);
+  opacity: 1;
 }
 
 h2 {
   display: none;
+}
+
+.page__body {
+  padding-top: 6em;
+  padding-bottom: 4em;
+}
+
+@media only screen and (min-width: 500px) {
+  .allCards {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media only screen and (min-width: 1323px) {
+  .allCards {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }

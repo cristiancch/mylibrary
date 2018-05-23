@@ -16,7 +16,7 @@ export default class AddToWishlistBtn extends React.Component {
     render() {
         return (
                 <img
-                    className="wishlist_btn"
+                    className="wishlist__button"
                     src="/src/assets/images/addTo_wishlist-icon.png"
                     onClick={() => this.handleClick(this.props.book)}
                 />

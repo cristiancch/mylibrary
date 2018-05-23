@@ -1,29 +1,19 @@
 import React from 'react';
 import './AddNewBook.scss';
 import Modal from 'react-modal';
-import {addToDB} from "../../helpers/jsonServerTransformer";
+import {addToDB, getDB, getPlaceholderBookCover} from "../../helpers/jsonServerTransformer";
 
 Modal.setAppElement(document.getElementById('root'));
 
 const modalStyle = {
-    overlay: {
-        position: 'fixed',
-        top: 200,
-        left: 300,
-        right: 300,
-        bottom: 100,
-        zIndex: 9999,
-        backgroundColor: 'rgba(255, 255, 255, 0.75)'
-    },
     content: {
-        content: {
-            top: '50%',
-            left: '50%',
-            right: 'auto',
-            bottom: 'auto',
-            marginRight: '-50%',
-            transform: 'translate(-50%, -50%)'
-        }
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        backgroundColor: 'rgba(63, 123, 145, 1)',
     }
 };
 
@@ -51,7 +41,6 @@ export default class AddNewBook extends React.Component {
         this.toggleModal = this.toggleModal.bind(this);
         this.onImageUpload = this.onImageUpload.bind(this);
         this.handleKeyUp = this.handleKeyUp.bind(this);
-        this.convertBase64ToImage = this.convertBase64ToImage.bind(this);
     }
 
 
@@ -86,7 +75,9 @@ export default class AddNewBook extends React.Component {
     closeModal() {
         this.setState({
             modalIsOpen: false
-        })
+        });
+
+        this.props.styleOnModalOpened('');
     }
 
     handleInputChange(event) {
@@ -100,38 +91,53 @@ export default class AddNewBook extends React.Component {
     }
 
     afterOpenModal() {
+        this.props.styleOnModalOpened('allCards blur');
     }
 
-    sendValues() {
+    sendValues(e) {
+
+        e.preventDefault();
+
         let book = {};
+        let lastBookId = this.props.allBooks[this.props.allBooks.length - 1].id;
+
+        //TODO do not refresh page on submit
+        //TODO find a way not to show query string into the URL -- done
+        //TODO show newly added book in the list without refreshing the page after DB insert --done
 
         book.author = this.state.bookAuthor;
         book.title = this.state.bookTitle;
         book.ISBN = this.state.bookISBN;
         book.price = this.state.bookPrice;
-        book.category = this.state.bookCategory;
+        if (this.state.category) {
+            book.category = this.state.bookCategory;
+        } else {
+            book.category = 'Afaceri';
+        }
         book.details = this.state.bookDescription;
         book.readedStatus = false;
-        book.id = 9;
-        book.cover = this.state.bookCover;
+        book.id = lastBookId + 1;
+
+        if (this.state.bookCover) {
+            book.cover = this.state.bookCover;
+        } else {
+            book.cover = getPlaceholderBookCover();
+        }
+
+        console.log('Book description: ', book.details);
 
         addToDB(book);
 
-        this.setState({
-            visible: false
-        });
-    }
+        // TODO .then to go to bookshelf without page reloading or history, using promises
 
-    convertBase64ToImage(bookCoverImage, title) {
+        this.closeModal();
 
-        let base64Str = bookCoverImage;
-        let path = '/src/assets/images/book-covers/';
-        let optionalObj = {'fileName': title};
-        base64ToImage(base64Str, path, optionalObj);
+        //this.props.history.push('/');
+
     }
 
     toggleModal(event) {
-        console.log(event);
+
         const {isOpen} = this.state.modalIsOpen;
         this.setState({
             modalIsOpen: !isOpen
@@ -149,8 +155,6 @@ export default class AddNewBook extends React.Component {
 
         reader.onload = () => {
             let fileContent = reader.result;
-            console.log(fileContent);
-
             this.setState({
                 bookCover: fileContent,
             })
@@ -172,8 +176,10 @@ export default class AddNewBook extends React.Component {
                     contentLabel="Add new book"
                     ariaHideApp={false}
                     style={modalStyle}
+                    overlayClassName="ReactModal__Overlay"
                 >
-                    <form>
+                    <button className="close-button" onClick={this.closeModal}>x</button>
+                    <form className="form__addNewBook">
                         <label>Title
                             <input
                                 className="addNewBook__textInput"
@@ -219,7 +225,7 @@ export default class AddNewBook extends React.Component {
                         <textarea
                             className="addNewBook__Textarea"
                             name="bookDescription"
-                            rows="10" cols="90" onClick={this.handleInputChange}
+                            rows="10" cols="90" onChange={this.handleInputChange}
                             placeholder="Book description">
                         </textarea>
                         <br/> <br/>
@@ -230,7 +236,6 @@ export default class AddNewBook extends React.Component {
                             multiple="false"
                             onChange={this.onImageUpload}
                         />
-                        <img src={this.state.bookCover}/>
                         <br/> <br/>
                         <input type="submit" value="Submit" onClick={this.sendValues}/>
                     </form>

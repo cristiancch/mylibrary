@@ -5,6 +5,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
+    "font-awesome": "^4.7.0",
+    "history": "^4.7.2",
     "lodash": "latest",
     "material-ui": "^0.20.0",
     "mui-form": "^1.1.16",
@@ -17,6 +19,8 @@
     "react-dom": "^16.3.2",
     "react-images-upload": "^1.0.7",
     "react-modal": "^3.4.4",
+    "react-onclickoutside": "^6.7.1",
+    "react-responsive": "^4.1.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
     "react-simple-popover": "^0.2.4",
