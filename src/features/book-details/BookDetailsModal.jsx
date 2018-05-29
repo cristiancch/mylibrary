@@ -109,7 +109,7 @@ export default class BookDetailsModal extends React.Component {
                     <li><b>ISBN:</b> {this.props.book.ISBN}
 
                         {this.props.fromWishlist ? (
-                            <RemoveFromWishlistBtn book={this.props.book}/>
+                            <RemoveFromWishlistBtn book={this.props.book.id}/>
                         ) : (
                             <AddToWishlistBtn book={this.props.book}
                                               wishlistBooks={this.props.getWishlist}

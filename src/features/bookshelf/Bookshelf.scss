@@ -38,6 +38,12 @@ h2 {
 
 @media only screen and (min-width: 500px) {
   .allCards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (min-width: 970px) {
+  .allCards {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }

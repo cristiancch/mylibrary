@@ -11,6 +11,7 @@ export default class RemoveFromWishlistBtn extends React.Component {
     }
 
     render() {
+
         return (
             <Link to='/wishlist/' href='/wishlist/'>
                 <img
@@ -23,6 +24,7 @@ export default class RemoveFromWishlistBtn extends React.Component {
     }
 
     handleClick(book) {
+        console.log('book to be deleted: ', book);
         removeBookFromLocalStorageWishlist(book);
     }
 }

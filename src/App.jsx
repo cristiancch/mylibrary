@@ -7,6 +7,7 @@ import Bookshelf from "./features/bookshelf/Bookshelf";
 import Wishlist from "./features/wishlist/Wishlist";
 import Route from "react-router-dom/es/Route";
 import createBrowserHistory from "history/es/createBrowserHistory";
+import {getDB} from "./helpers/jsonServerTransformer";
 
 const history = createBrowserHistory({
         basename: "/allBooks",
@@ -25,14 +26,14 @@ export default class App extends Component {
             wishlist: [],
             category: '',
             bookAdded: [],
-            addNewBookModalStatus: ''
+            addNewBookModalStatus: '',
         };
 
         this.searchBook = this.searchBook.bind(this);
         this.getBookCategory = this.getBookCategory.bind(this);
         this.onNewBookAdded = this.onNewBookAdded.bind(this);
         this.getAddBookModalStatus = this.getAddBookModalStatus.bind(this);
-
+        this.updateAddedNewBookStatus = this.updateAddedNewBookStatus.bind(this);
     }
 
     componentDidMount() {
@@ -66,6 +67,29 @@ export default class App extends Component {
         });
     }
 
+    updateAddedNewBookStatus(book) {
+
+        //TODO add received book in the books state
+        //TODO form validation (at book cover to be mandatory to have an image, and at book category the same
+
+        let booksAux = [...this.state.books];
+
+        if (book)
+            booksAux.push(book);
+
+        this.setState({
+            books: booksAux
+        });
+
+        /*
+           axios.get('http://localhost:3000/books')
+                   .then(res => {
+                       this.setState({books: res.data});
+                   });*/
+
+        // this.refs.bookshelfComponent.onNewBookStatus();
+    }
+
 
     render() {
         return (
@@ -77,6 +101,7 @@ export default class App extends Component {
                     onStyleModalOpened={this.getAddBookModalStatus}
                     allBooks={this.state.books}
                     history={history}
+                    wasAddedNewBookStatus={this.updateAddedNewBookStatus}
                 />
                 <div className="page__body">
                     <Switch>
@@ -88,6 +113,7 @@ export default class App extends Component {
                                        category={''}
                                        addNewBookModalStatus={this.state.addNewBookModalStatus}
                                        history={history}
+                                       wasAddedNewBookStatus={this.state.newBookWasAdded}
                                    />}
                         />
                         <Route path='/allBooks'
@@ -98,6 +124,7 @@ export default class App extends Component {
                                        bookToSearch={this.state.bookToBeSearched}
                                        addNewBookModalStatus={this.state.addNewBookModalStatus}
                                        history={history}
+                                       wasAddedNewBookStatus={this.state.newBookWasAdded}
                                    />}
                         />
                         <Route path='/category/:id'
@@ -108,6 +135,7 @@ export default class App extends Component {
                                        category={props.match.params.id}
                                        addNewBookModalStatus={this.state.addNewBookModalStatus}
                                        history={history}
+                                       wasAddedNewBookStatus={this.state.newBookWasAdded}
                                    />}
                         />
                         <Route path='/bookDetail/:id'
@@ -126,6 +154,7 @@ export default class App extends Component {
                                        {...props}
                                        wishlist={this.state.wishlist}
                                        history={history}
+                                       allBooks={getDB()}
                                    />
                                }
                         />

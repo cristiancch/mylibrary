@@ -12,6 +12,7 @@ export default class Navbar extends React.Component {
         this.bookSearch = this.bookSearch.bind(this);
         this.getBookCategory = this.getBookCategory.bind(this);
         this.onModalOpened = this.onModalOpened.bind(this);
+        this.onWasAddedNewBook = this.onWasAddedNewBook.bind(this);
     }
 
     bookSearch(book) {
@@ -24,6 +25,10 @@ export default class Navbar extends React.Component {
 
     onModalOpened(status) {
         this.props.onStyleModalOpened(status);
+    }
+
+    onWasAddedNewBook(status) {
+        this.props.wasAddedNewBookStatus(status);
     }
 
 
@@ -41,6 +46,7 @@ export default class Navbar extends React.Component {
                                 styleOnModalOpened={this.onModalOpened}
                                 allBooks={this.props.allBooks}
                                 history={this.props.history}
+                                wasAddedNewBookStatus={this.onWasAddedNewBook}
                             />
                         </li>
                         <SearchBar onSearchTermChanged={this.bookSearch}/>

@@ -10,7 +10,7 @@ export default class AddToWishlistBtn extends React.Component {
     }
 
     handleClick(book) {
-        addBookToLocalStorageWishlist(book);
+        addBookToLocalStorageWishlist(book.id);
     }
 
     render() {

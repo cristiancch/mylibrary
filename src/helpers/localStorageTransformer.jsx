@@ -32,15 +32,14 @@ export function removeBookFromLocalStorageWishlist(book) {
     let json = localStorage.getItem('wishlist');
     let books = JSON.parse(json);
 
-    let array = [...books];
-    let index = array.indexOf(book);
+    let booksArray = [...books];
+    let index = booksArray.indexOf(book);
 
-   /* console.log('copy of books: ', array);
-    console.log('remove book with id ', book.id, ' from index ', index);*/
+debugger;
 
-    array.splice(index, 1);
+    booksArray.splice(index, 1);
 
-    json = JSON.stringify(array);
+    json = JSON.stringify(booksArray);
     localStorage.removeItem('wishlist');
     localStorage.setItem('wishlist', json);
 }

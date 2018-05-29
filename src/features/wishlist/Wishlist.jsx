@@ -10,8 +10,9 @@ export default class Wishlist extends React.Component {
                 <h2>All cards from wishlist</h2>
                 {getWishlistFromLocalStorage() ? (
                     <Bookshelf
-                        books={getWishlistFromLocalStorage()}
+                        booksIds={getWishlistFromLocalStorage()}
                         fromWishlist={true}
+                        allBooks={this.props.allBooks}
                     />
                 ) : (
                     <h1>No books in wishlist..</h1>
