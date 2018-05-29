@@ -154,7 +154,7 @@ export default class App extends Component {
                                        {...props}
                                        wishlist={this.state.wishlist}
                                        history={history}
-                                       allBooks={getDB()}
+                                       allBooks={this.state.books}
                                    />
                                }
                         />
