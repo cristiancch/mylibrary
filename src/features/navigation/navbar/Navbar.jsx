@@ -4,11 +4,12 @@ import Link from "react-router-dom/es/Link";
 import SearchBar from './SearchBar';
 import BookCategoryBtn from "../../book-details/BookCategoryBtn";
 import AddNewBook from "../../addNewBook/AddNewBookModal";
+import SignUpUser from "../../signUpUser/SignUpUser";
 
 export default class Navbar extends React.Component {
 
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
         this.bookSearch = this.bookSearch.bind(this);
         this.getBookCategory = this.getBookCategory.bind(this);
         this.onModalOpened = this.onModalOpened.bind(this);
@@ -31,7 +32,6 @@ export default class Navbar extends React.Component {
         this.props.wasAddedNewBookStatus(status);
     }
 
-
     render() {
         return (
             <header>
@@ -47,6 +47,11 @@ export default class Navbar extends React.Component {
                                 allBooks={this.props.allBooks}
                                 history={this.props.history}
                                 wasAddedNewBookStatus={this.onWasAddedNewBook}
+                            />
+                        </li>
+                        <li className="nav__li">
+                            <SignUpUser
+                                styleOnModalOpened={this.onModalOpened}
                             />
                         </li>
                         <SearchBar onSearchTermChanged={this.bookSearch}/>

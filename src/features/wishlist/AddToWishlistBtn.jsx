@@ -1,6 +1,7 @@
 import React from 'react';
-import {addBookToLocalStorageWishlist} from "../../helpers/localStorageTransformer";
 import "./Wishlist.scss";
+import BooksCollection from "../../services/BooksCollection";
+
 
 export default class AddToWishlistBtn extends React.Component {
 
@@ -10,16 +11,21 @@ export default class AddToWishlistBtn extends React.Component {
     }
 
     handleClick(book) {
-        addBookToLocalStorageWishlist(book.id);
+        let booksCollection = new BooksCollection();
+        booksCollection.addBookToWishlistDB(book).then((res) => {
+            console.log(res);
+        });
+        this.props.onBookAdded(book);
     }
 
     render() {
         return (
-                <img
-                    className="wishlist__button"
-                    src="/src/assets/images/addTo_wishlist-icon.png"
-                    onClick={() => this.handleClick(this.props.book)}
-                />
+            <img
+                className="wishlist__button"
+                src="/src/assets/images/addTo_wishlist-icon.png"
+                onClick={() => this.handleClick(this.props.book)}
+            />
+
         );
     }
 }

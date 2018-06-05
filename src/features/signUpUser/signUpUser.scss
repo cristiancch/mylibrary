@@ -1,0 +1,75 @@
+h1 {
+  display: none;
+}
+
+.signUpUser__textInput {
+  width: 100%;
+  padding: 20px;
+  margin: 8px;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+input.active:valid {
+  box-shadow: 0 0 5px 1px green;
+}
+
+.form__signUpUser {
+  background-color: rgba(63, 123, 145, 0.75);
+}
+
+.Overlay {
+  opacity: 1;
+}
+
+.signUpUser__btn {
+  background-color: #60656F;
+  padding: 16px;
+  font-size: 20px;
+  border: none;
+  color: white;
+
+  &:hover {
+    background-color: #111;
+  }
+}
+
+.close-button {
+  position: absolute;
+  z-index: 1;
+  top: 10px;
+  right: 20px;
+  border: 0;
+  background: black;
+  color: white;
+  padding: 5px 10px;
+  font-size: 1.3rem;
+}
+
+.createAccount-button {
+  z-index: 1;
+  width: 100%;
+  border: 0;
+  background: green;
+  color: white;
+  padding: 20px;
+  font-size: 1.3rem;
+  text-align: center;
+  margin: 8px;
+  border-radius: 10px;
+}
+
+.login-button {
+  z-index: 1;
+  width: 100%;
+  border: 0;
+  background: dodgerblue;
+  color: white;
+  padding: 20px;
+  font-size: 1.3rem;
+  text-align: center;
+  margin: 8px;
+  top: 10px;
+  border-radius: 5px;
+}
+

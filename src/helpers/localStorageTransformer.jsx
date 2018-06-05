@@ -35,8 +35,6 @@ export function removeBookFromLocalStorageWishlist(book) {
     let booksArray = [...books];
     let index = booksArray.indexOf(book);
 
-debugger;
-
     booksArray.splice(index, 1);
 
     json = JSON.stringify(booksArray);

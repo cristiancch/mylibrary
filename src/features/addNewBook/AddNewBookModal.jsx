@@ -2,6 +2,7 @@ import React from 'react';
 import './AddNewBook.scss';
 import Modal from 'react-modal';
 import {addToDB} from "../../helpers/jsonServerTransformer";
+import ErrorMessage from "./ErrorMessage";
 
 Modal.setAppElement(document.getElementById('root'));
 
@@ -38,7 +39,9 @@ export default class AddNewBook extends React.Component {
             bookPriceError: false,
             bookISBNError: false,
             bookCategoryError: false,
-            bookCoverError: false
+            bookCoverError: true,
+
+            sendValuesPressed: false
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -85,11 +88,15 @@ export default class AddNewBook extends React.Component {
             modalIsOpen: false
         });
 
+
         this.props.styleOnModalOpened('');
-        if (!this.formValidation())
+        if (!this.formValidation()) {
             this.props.wasAddedNewBookStatus('');
-        else
+        }
+        else {
+            console.log('Book this.formValidation(): ', book);
             this.props.wasAddedNewBookStatus(book);
+        }
 
         this.setState({
             bookAuthor: '',
@@ -105,7 +112,7 @@ export default class AddNewBook extends React.Component {
             bookPriceError: false,
             bookISBNError: false,
             bookCategoryError: false,
-            bookCoverError: false
+            bookCoverError: true
         })
     }
 
@@ -119,8 +126,8 @@ export default class AddNewBook extends React.Component {
             [name]: value
         });
 
-        //this.formValidation();
-
+        if (this.state.sendValuesPressed)
+            this.formValidation();
     }
 
 
@@ -143,12 +150,15 @@ export default class AddNewBook extends React.Component {
         book.details = this.state.bookDescription;
         book.readedStatus = false;
         book.id = lastBookId + 1;
-
         book.cover = this.state.bookCover;
 
-        if (this.formValidation()) {
+        this.setState({
+            sendValuesPressed: true
+        });
+
+        if (this.formValidation() && book.title) {
             addToDB(book).then((res) => {
-                console.log('something', res);
+                // console.log('Response: ', res);
                 this.closeModal(book);
             });
         }
@@ -164,11 +174,6 @@ export default class AddNewBook extends React.Component {
     }
 
     onImageUpload(image) {
-
-        let title = image.target.files[0].name;
-
-        console.log('Image title: ', title);
-
         let reader = new FileReader();
         reader.readAsDataURL(image.target.files[0]);
 
@@ -183,96 +188,34 @@ export default class AddNewBook extends React.Component {
     }
 
     formValidation() {
-        let isValid = true;
+        // TODO check double negation
+        this.setState({
+            bookAuthorError: this.state.bookAuthor ? false : true,
+            bookTitleError: this.state.bookTitle ? false : true,
+            bookDescriptionError: this.state.bookDescription ? false : true,
+            bookISBNError: (this.state.bookISBN.match("^[0-9-]*$") && this.state.bookISBN.length >= 10) ? false : true,
+            bookPriceError: this.state.bookPrice ? false : true,
+            bookCategoryError: this.state.bookCategory ? false : true,
+        });
 
-        if (this.state.bookAuthor.length < 1 || this.state.bookAuthor === '') {
-            this.setState({
-                bookAuthorError: true
-            });
-            isValid = isValid && false;
-        } else {
-            this.setState({
-                bookAuthorError: false
-            });
-            isValid = isValid && true;
-        }
 
-        if (this.state.bookTitle.length < 1 || this.state.bookTitle === '') {
-            this.setState({
-                bookTitleError: true
-            });
-            isValid = isValid && false;
-        } else {
-            this.setState({
-                bookTitleError: false
-            });
-            isValid = isValid && true;
-        }
+        console.log('bookAuthorError: ', this.state.bookAuthorError);
+        console.log('bookTitleE: ', this.state.bookTitleError);
+        console.log('bookDescrError: ', this.state.bookDescriptionError);
+        console.log('bookISBNError: ', this.state.bookISBNError);
+        console.log('bookPriceError: ', this.state.bookPriceError);
+        console.log('bookCategoryError: ', this.state.bookCategoryError);
+        console.log('bookCoverError: ', this.state.bookCoverError);
 
-        if (this.state.bookDescription.length < 1 || this.state.bookDescription === '') {
-            this.setState({
-                bookDescriptionError: true
-            });
-            isValid = isValid && false;
-        } else {
-            this.setState({
-                bookDescriptionError: false
-            });
-            isValid = isValid && true;
-        }
+        let stateObj = [this.state.bookTitleError, this.state.bookAuthorError, this.state.bookDescriptionError,
+            this.state.bookISBNError, this.state.bookPriceError, this.state.bookCoverError, this.state.bookCategoryError];
 
-        if (this.state.bookISBN.match("^[0-9-]*$") !== null && this.state.bookISBN.length >= 10 && this.state.bookISBN !== '') {
-            this.setState({
-                bookISBNError: false
-            });
-            isValid = isValid && false;
-        } else {
-            this.setState({
-                bookISBNError: true
-            });
-            isValid = isValid && true;
-        }
+        // TODO array method except map
 
-        if (this.state.bookPrice.length < 1 || this.state.bookPrice === '') {
-            this.setState({
-                bookPriceError: true
-            });
-            isValid = isValid && false;
-        } else {
-            this.setState({
-                bookPriceError: false
-            });
-            isValid = isValid && true;
-        }
-
-        if (this.state.bookCategory === '') {
-            console.log('error');
-            this.setState({
-                bookCategoryError: true
-            });
-            isValid = isValid && false;
-        } else {
-            console.log('no error');
-            this.setState({
-                bookCategoryError: false
-            });
-            isValid = isValid && true;
-        }
-
-        if (this.state.bookCover.length < 1 || this.state.bookCover === '') {
-            this.setState({
-                bookCoverError: true
-            });
-            isValid = isValid && false;
-        } else {
-            this.setState({
-                bookCoverError: false
-            });
-            isValid = isValid && true;
-        }
-        return isValid;
+        return stateObj.every((aux) => {
+            return aux === false
+        });
     }
-
 
     render() {
 
@@ -304,7 +247,9 @@ export default class AddNewBook extends React.Component {
                                 value={this.state.bookTitle}
                                 required
                             />
-                            {this.state.bookTitleError ? <ErrorMessage/> : null}
+                            <ErrorMessage
+                                isError={this.state.bookTitleError}
+                                message=" Please insert the book title"/>
                         </label>
                         <br/> <br/>
                         <label>Author
@@ -315,7 +260,9 @@ export default class AddNewBook extends React.Component {
                                 ref="bookAuthor"
                                 onChange={this.handleInputChange}
                                 required/>
-                            {this.state.bookAuthorError ? <ErrorMessage/> : null}
+                            <ErrorMessage
+                                isError={this.state.bookAuthorError}
+                                message=" Please insert the book author"/>
                         </label>
                         <br/> <br/>
                         <label>ISBN
@@ -327,9 +274,9 @@ export default class AddNewBook extends React.Component {
                                 onChange={this.handleInputChange}
                                 data-fv-isbn={true}
                                 required/>
-                            {this.state.bookISBNError ? <div style={{color: 'red', fontSize: 12}}>
-                                {this.state.bookISBN ? 'Please enter a valid ISBN' : 'Requiered Field'}
-                            </div> : null}
+                            <ErrorMessage
+                                isError={this.state.bookISBNError}
+                                message=" Please insert the book ISBN"/>
                         </label>
                         <br/> <br/>
                         <label>Price
@@ -340,7 +287,9 @@ export default class AddNewBook extends React.Component {
                                 type="number"
                                 onChange={this.handleInputChange}
                                 required={true}/>
-                            {this.state.bookPriceError ? <ErrorMessage/> : null}
+                            <ErrorMessage
+                                isError={this.state.bookPriceError}
+                                message=" Please insert the book price"/>
                         </label>
                         <br/> <br/>
                         <label>Category
@@ -354,17 +303,22 @@ export default class AddNewBook extends React.Component {
                                 <option value="Dictionare">Dictionare</option>
                                 <option value="Biografii">Biografii</option>
                             </select>
-                            {this.state.bookCategoryError ? <ErrorMessage/> : null}
+                            <ErrorMessage
+                                isError={this.state.bookCategoryError}
+                                message=" Please insert the book category"/>
                         </label>
                         <br/> <br/>
                         <textarea
                             className='addNewBook__Textarea'
                             name="bookDescription"
-                            rows="10" cols="90" onChange={this.handleInputChange}
+                            rows="10" cols="90"
+                            onChange={this.handleInputChange}
                             placeholder="Book description"
                             required={true}>
-                            {this.state.bookDescriptionError ? <ErrorMessage/> : null}
                     </textarea>
+                        <ErrorMessage
+                            isError={this.state.bookDescriptionError}
+                            message=" Please insert the book description"/>
                         <br/> <br/>
                         <input
                             ref="file"
@@ -374,7 +328,9 @@ export default class AddNewBook extends React.Component {
                             onChange={this.onImageUpload}
                             required={true}
                         />
-                        {this.state.bookCoverError ? <ErrorMessage/> : null}
+                        <ErrorMessage
+                            isError={this.state.bookCoverError}
+                            message=" Please insert the book cover"/>
                         <br/> <br/>
                         <input
                             type="submit"
@@ -388,11 +344,5 @@ export default class AddNewBook extends React.Component {
     }
 }
 
-
-const ErrorMessage = () => (
-    <div style={{color: 'red', fontSize: 12}}>
-        Requiered field!
-    </div>
-);
 
 

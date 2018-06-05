@@ -1,6 +1,6 @@
 import React from 'react';
-import {removeBookFromLocalStorageWishlist} from "../../helpers/localStorageTransformer";
 import Link from "react-router-dom/es/Link";
+import BooksCollection from "../../services/BooksCollection";
 
 export default class RemoveFromWishlistBtn extends React.Component {
 
@@ -25,6 +25,8 @@ export default class RemoveFromWishlistBtn extends React.Component {
 
     handleClick(book) {
         console.log('book to be deleted: ', book);
-        removeBookFromLocalStorageWishlist(book);
+        let booksCollection = new BooksCollection();
+        booksCollection.removeBookFromWishlist(book);
+        this.props.bookRemovedFromWishlist(book);
     }
 }

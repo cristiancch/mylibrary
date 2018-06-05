@@ -33,6 +33,7 @@ export default class BookDetailsModal extends React.Component {
         this.toggleModal = this.toggleModal.bind(this);
         this.handleKeyUp = this.handleKeyUp.bind(this);
         this.onReadedStatusChanged = this.onReadedStatusChanged.bind(this);
+        this.onBookRemoved = this.onBookRemoved.bind(this);
     }
 
 
@@ -64,9 +65,10 @@ export default class BookDetailsModal extends React.Component {
         })
     }
 
-    closeModal() {
+    closeModal(book) {
+
         this.setState({
-            modalIsOpen: false
+            modalIsOpen: false,
         });
     }
 
@@ -86,6 +88,11 @@ export default class BookDetailsModal extends React.Component {
             isRead: status
         });
     }
+
+    onBookRemoved(book) {
+        this.props.bookDeleted(book);
+    }
+
 
     render() {
         let categoryURL = '/category/' + this.props.book.category.toLowerCase();
@@ -109,10 +116,14 @@ export default class BookDetailsModal extends React.Component {
                     <li><b>ISBN:</b> {this.props.book.ISBN}
 
                         {this.props.fromWishlist ? (
-                            <RemoveFromWishlistBtn book={this.props.book.id}/>
+                            <RemoveFromWishlistBtn
+                                book={this.props.book}
+                                bookRemovedFromWishlist={this.onBookRemoved}
+                            />
                         ) : (
                             <AddToWishlistBtn book={this.props.book}
                                               wishlistBooks={this.props.getWishlist}
+                                              onBookAdded={this.closeModal}
                             />
                         )}
                         <BookReadStatus

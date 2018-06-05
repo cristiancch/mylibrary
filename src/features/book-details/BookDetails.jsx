@@ -10,6 +10,7 @@ export default class BookDetails extends React.Component {
         super(props, context);
         this.getWishlist = this.getWishlist.bind(this);
         this.triggerModalOpen = this.triggerModalOpen.bind(this);
+        this.onBookDeletedFromWishlist = this.onBookDeletedFromWishlist.bind(this);
     }
 
     triggerModalOpen() {
@@ -20,59 +21,54 @@ export default class BookDetails extends React.Component {
         this.props.onReceiveBooks(books);
     }
 
+    onBookDeletedFromWishlist(book) {
+        this.props.onBookRemovedFromWishlist(book);
+    }
+
     render() {
-        let books = this.props.books;
-
-        if (books.length || this.props.toSearch) {
-
-            let book;
-            if (this.props.id.id)
-                book = books[this.props.id.id];
-            else
-                book = books[this.props.id];
-
-            if (book)
-                if (this.props.toSearch) {
-                    if (book.title.toLowerCase().indexOf(this.props.toSearch.toLowerCase()) === -1) {
-                        book = '';
-                    }
+        let book = this.props.book;
+        if (book)
+            if (this.props.toSearch) {
+                if (book.title.toLowerCase().indexOf(this.props.toSearch.toLowerCase()) === -1) {
+                    book = '';
                 }
-
-            if (book) {
-                return (
-                    <section className="card card--hover">
-                        <h4>Card section</h4>
-                        <div>
-                            <h5>Card subsection from wishlist</h5>
-                            <section className="container">
-                                <BookDetailsHeader
-                                    book={book}
-                                />
-                                <p className="ShowDetails">
-                                    {book.details.substr(0, 100) + '..   '}
-                                    <a href={'#!'}
-                                       onClick={this.triggerModalOpen}
-                                       style={{fontSize: '12px'}}
-                                    >show more details</a>
-                                </p>
-                                <BookDetailsModal
-                                    ref="bookDetailsModal"
-                                    book={book}
-                                    fromWishlist={this.props.fromWishlist}
-                                    getWishlist={this.getWishlist}
-                                />
-                            </section>
-                        </div>
-                    </section>
-                );
             }
-            else
-                return (
-                    null
-                );
+        if (book) {
+            return (
+                <section className="card card--hover">
+                    <h4>Card section</h4>
+                    <div>
+                        <h5>Card subsection from wishlist</h5>
+                        <section className="container">
+                            <BookDetailsHeader
+                                book={book}
+                            />
+                            <p className="ShowDetails">
+                                {book.details.substr(0, 100) + '..   '}
+                                <a href={'#!'}
+                                   onClick={this.triggerModalOpen}
+                                   style={{fontSize: '12px'}}
+                                >show more details</a>
+                            </p>
+                            <BookDetailsModal
+                                ref="bookDetailsModal"
+                                book={book}
+                                fromWishlist={this.props.fromWishlist}
+                                getWishlist={this.getWishlist}
+                                bookDeleted={this.onBookDeletedFromWishlist}
+                            />
+                        </section>
+                    </div>
+                </section>
+            );
         }
+        else
+            return (
+                null
+            );
     }
 }
+
 
 
 

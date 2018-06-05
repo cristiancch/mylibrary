@@ -7,7 +7,8 @@ import Bookshelf from "./features/bookshelf/Bookshelf";
 import Wishlist from "./features/wishlist/Wishlist";
 import Route from "react-router-dom/es/Route";
 import createBrowserHistory from "history/es/createBrowserHistory";
-import {getDB} from "./helpers/jsonServerTransformer";
+import BooksCollection from "./services/BooksCollection";
+
 
 const history = createBrowserHistory({
         basename: "/allBooks",
@@ -27,6 +28,7 @@ export default class App extends Component {
             category: '',
             bookAdded: [],
             addNewBookModalStatus: '',
+            booksByCategory: [],
         };
 
         this.searchBook = this.searchBook.bind(this);
@@ -36,11 +38,24 @@ export default class App extends Component {
         this.updateAddedNewBookStatus = this.updateAddedNewBookStatus.bind(this);
     }
 
+    componentWillMount() {
+        let bookCollection = new BooksCollection();
+        bookCollection.getAllBooks().then((res) => {
+            this.setState({
+                books: res
+            })
+        });
+    }
+
     componentDidMount() {
-        axios.get('http://localhost:3000/books')
-            .then(res => {
-                this.setState({books: res.data});
-            });
+        let bookCollection = new BooksCollection();
+        bookCollection.getAllBooks().then((res) => {
+            this.setState({
+                books: res
+            })
+
+        });
+
     }
 
     onNewBookAdded(book) {
@@ -56,8 +71,17 @@ export default class App extends Component {
     }
 
     getBookCategory(category) {
+        console.log('get book category', category);
         this.setState({
             category: category
+        });
+
+        let booksCollection = new BooksCollection();
+        booksCollection.getBooksIdsByCategory(category).then((res) => {
+            this.setState({
+                booksByCategory: res,
+                category: category
+            })
         });
     }
 
@@ -68,28 +92,13 @@ export default class App extends Component {
     }
 
     updateAddedNewBookStatus(book) {
-
-        //TODO add received book in the books state
-        //TODO form validation (at book cover to be mandatory to have an image, and at book category the same
-
         let booksAux = [...this.state.books];
-
-        if (book)
+        if (book.title)
             booksAux.push(book);
-
         this.setState({
             books: booksAux
         });
-
-        /*
-           axios.get('http://localhost:3000/books')
-                   .then(res => {
-                       this.setState({books: res.data});
-                   });*/
-
-        // this.refs.bookshelfComponent.onNewBookStatus();
     }
-
 
     render() {
         return (
@@ -108,9 +117,9 @@ export default class App extends Component {
                         <Route exact path="/"
                                render={(props) =>
                                    <Bookshelf
-                                       {...props} books={this.state.books}
+                                       {...props}
+                                       books={this.state.books}
                                        bookToSearch={this.state.bookToBeSearched}
-                                       category={''}
                                        addNewBookModalStatus={this.state.addNewBookModalStatus}
                                        history={history}
                                        wasAddedNewBookStatus={this.state.newBookWasAdded}
@@ -131,8 +140,8 @@ export default class App extends Component {
                                render={(props) =>
                                    <Bookshelf
                                        {...props}
-                                       books={this.state.books}
-                                       category={props.match.params.id}
+                                       books={this.state.booksByCategory}
+                                       //category={this.getBookByCategory(props.match.params.id)}
                                        addNewBookModalStatus={this.state.addNewBookModalStatus}
                                        history={history}
                                        wasAddedNewBookStatus={this.state.newBookWasAdded}

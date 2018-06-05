@@ -26,17 +26,19 @@ export function addToDB(book) {
             })
         );
     }).then((res) => {
-       // console.log('Book added to DB, status: ', res);
+        // console.log('Book added to DB, status: ', res);
         return res;
     })
 }
 
 export function getDB() {
-    axios.get('http://localhost:3000/books')
-        .then(res => {
-            console.log('///////////// -> ', res.data);
-            return res.data;
-        });
+    return new Promise((resolve, reject) => {
+        resolve(
+            axios.get('http://localhost:3000/books')
+        );
+    }).then(res => {
+        return res.data;
+    });
 }
 
 export function getPlaceholderBookCover() {
