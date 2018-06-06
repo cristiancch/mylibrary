@@ -139,12 +139,20 @@
   ],
   "users": [
     {
-      "id": 0,
+      "userFirstname": "Firstname",
+      "userLastname": "Lastname",
+      "userEmail": "email@mail.com",
+      "userUsername": "username",
+      "userPassword": "a9df5befb71cc077be38fedf15dec6ca63af12b000a81aaa7cdda248da6503f4740fade10cf8bc5855a9c86e188172caa11eb4602fc35321255311dbf493b0be",
+      "id": 0
+    },
+    {
       "userFirstname": "Chiorescu",
       "userLastname": "Cristian",
-      "userEmail": "chiorescu.cristian@gmail.com",
+      "userEmail": "cristian.chiorescu@gmail.com",
       "userUsername": "cristian.chiorescu",
-      "userPassword": "f80b0668f999dfd5c69b82c312873e755076ce997a792cdcbae60d8bc82279db0e8ff901ad15c06b3f2a33d40db3596e162fde05486b41b19d54879372844271"
+      "userPassword": "ffe746e04930114f536e4c023c93f9fb87381a96fa64e5b3756e2d0f9e53fd252e2e22296c08af00d212066ba539a5d5084ace7604d9e8edea8b7ab494ac2e2b",
+      "id": 1
     }
   ]
 }

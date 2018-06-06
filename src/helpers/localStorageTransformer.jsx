@@ -119,6 +119,24 @@ export function addReadedBooksToLocalStorage(books) {
         }
 }
 
+export function addLoggedUserToLocalStorage(user) {
+    let localStorage = window.localStorage;
+
+    user.userPassword='';
+
+    let json = JSON.stringify(user);
+
+    localStorage.setItem('loggedUser', json);
+}
+
+export function removeLoggedUserFromLocalStorage() {
+    let localStorage = window.localStorage;
+
+    if (localStorage.getItem('loggedUser')) {
+        localStorage.removeItem('loggedUser');
+    }
+}
+
 
 
 

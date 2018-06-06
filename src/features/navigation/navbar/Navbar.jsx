@@ -4,16 +4,46 @@ import Link from "react-router-dom/es/Link";
 import SearchBar from './SearchBar';
 import BookCategoryBtn from "../../book-details/BookCategoryBtn";
 import AddNewBook from "../../addNewBook/AddNewBookModal";
-import SignUpUser from "../../signUpUser/SignUpUser";
+import SignUpUser from "../../signUp-LoginUser/SignUpUser";
+import WelcomeUser from "./WelcomeUser";
 
 export default class Navbar extends React.Component {
 
     constructor(props, context) {
         super(props, context);
+
+        this.state = {
+            loggedUser: '',
+            displaySignUp: true,
+        };
+
         this.bookSearch = this.bookSearch.bind(this);
         this.getBookCategory = this.getBookCategory.bind(this);
         this.onModalOpened = this.onModalOpened.bind(this);
         this.onWasAddedNewBook = this.onWasAddedNewBook.bind(this);
+        this.onLogin = this.onLogin.bind(this);
+        this.onLogout = this.onLogout.bind(this);
+    }
+
+    componentDidMount() {
+
+        let localStorage = window.localStorage;
+
+        let json = localStorage.getItem('loggedUser');
+
+        if (json) {
+            let user = JSON.parse(json);
+            if (user.userUsername) {
+                this.setState({
+                    loggedUser: user.userUsername,
+                    displaySignUp: false
+                });
+            }
+        } else {
+            this.setState({
+                displaySignUp: true
+            })
+        }
     }
 
     bookSearch(book) {
@@ -30,6 +60,36 @@ export default class Navbar extends React.Component {
 
     onWasAddedNewBook(status) {
         this.props.wasAddedNewBookStatus(status);
+    }
+
+    onLogin(status) {
+        console.log('In Navbar, status is', status, ';');
+
+        if (status) {
+            let localStorage = window.localStorage;
+
+            let json = localStorage.getItem('loggedUser');
+
+            if (json) {
+                let user = JSON.parse(json);
+
+                if (user.userUsername) {
+                    console.log('username: ', user.userUsername);
+                    this.setState({
+                        loggedUser: user.userUsername,
+                    });
+                }
+            }
+        }
+        this.setState({
+            displaySignUp: false
+        })
+    }
+
+    onLogout(status) {
+        this.setState({
+            displaySignUp: true
+        })
     }
 
     render() {
@@ -52,8 +112,15 @@ export default class Navbar extends React.Component {
                         <li className="nav__li">
                             <SignUpUser
                                 styleOnModalOpened={this.onModalOpened}
+                                handleSuccessLogin={this.onLogin}
+                                show={this.state.displaySignUp}
                             />
                         </li>
+                        <WelcomeUser
+                            onLogout={this.onLogout}
+                            username={this.state.loggedUser}
+                            show={this.state.displaySignUp}
+                        />
                         <SearchBar onSearchTermChanged={this.bookSearch}/>
                     </ul>
                 </nav>

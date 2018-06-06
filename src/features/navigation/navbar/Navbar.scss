@@ -1,7 +1,7 @@
 .nav {
   left: 9px;
   right: 9px;
-  top:1px;
+  top: 1px;
   position: absolute;
   z-index: 111;
   padding-top: 0;
@@ -36,13 +36,34 @@
   }
 }
 
+.welcomeUser {
+  float: left;
+  margin: 0;
+  border: none;
+  display: block;
+  color: white;
+  text-align: center;
+  font-size: 21px;
+  padding: 16px 16px;
+  text-decoration: none;
+  background-color: #60656F;
+}
+
 .nav__li--active {
   background-color: #C49991;
 }
 
 .categoryDropdown {
-  float: left;
+  float: right;
   overflow: hidden;
+}
+
+.welcomeUser__logoutBtn {
+  background-color: #60656F;
+  padding: 16px;
+  font-size: 20px;
+  border: none;
+  color: white;
 }
 
 .categoryDropdown .categoryDropdown__dropBtn {
@@ -134,11 +155,17 @@ h2 {
   .navbar {
     width: 90%;
   }
+  .welcomeUser {
+    margin-left: 1%;
+  }
 }
 
 @media screen and (min-width: 768px) {
   .navbar {
     width: 750px;
+  }
+  .welcomeUser {
+    margin-left: 5%;
   }
 }
 
@@ -146,10 +173,25 @@ h2 {
   .navbar {
     width: 990px;
   }
+  .welcomeUser {
+    margin-left: 5%;
+  }
 }
 
 @media screen and (min-width: 1200px) {
   .navbar {
     width: 1170px;
+  }
+  .welcomeUser {
+    margin-left: 5%;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .navbar {
+    width: 1170px;
+  }
+  .welcomeUser {
+    margin-left: 33%;
   }
 }
