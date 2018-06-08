@@ -8,6 +8,7 @@ export default class UserModel {
         this.userPassword = user.password;
     }
 
+
     get firstname() {
         return this.userFirstname;
     }

@@ -13,22 +13,6 @@ export default class WelcomeUser extends React.Component {
         this.handleLogout = this.handleLogout.bind(this);
     }
 
-    /*componentDidMount() {
-
-        let localStorage = window.localStorage;
-
-        let json = localStorage.getItem('loggedUser');
-
-        if (json) {
-            let user = JSON.parse(json);
-
-            if (user.userUsername) {
-                this.setState({
-                    loggedUser: user.userUsername
-                });
-            }
-        }
-    }*/
 
     handleLogout() {
         removeLoggedUserFromLocalStorage();

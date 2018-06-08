@@ -44,7 +44,7 @@ export default class UsersCollection {
             auxUser.email = user.userEmail;
             auxUser.username = user.userUsername;
             auxUser.password = user.userPassword;
-
+            auxUser.id = user.id;
             let userModel = new UserModel(auxUser);
             this.allUsers.push(userModel);
         }

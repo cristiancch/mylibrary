@@ -7,20 +7,35 @@ export default class RemoveFromWishlistBtn extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            isUserLogged: false
+        };
+
         this.handleClick = this.handleClick.bind(this);
     }
 
-    render() {
+    componentDidMount() {
+        let localStorage = window.localStorage;
 
-        return (
-            <Link to='/wishlist/' href='/wishlist/'>
-                <img
-                    src="/src/assets/images/remove_wishlist-icon.png"
-                    className="wishlist__button"
-                    onClick={() => this.handleClick(this.props.book)}
-                />
-            </Link>
-        );
+        if (localStorage.getItem('loggedUser')) {
+            this.setState({
+                isUserLogged: localStorage.getItem('loggedUser')
+            });
+        }
+    }
+
+    render() {
+        if (this.state.isUserLogged)
+            return (
+                <Link to='/wishlist/' href='/wishlist/'>
+                    <img
+                        src="/src/assets/images/remove_wishlist-icon.png"
+                        className="wishlist__button"
+                        onClick={() => this.handleClick(this.props.book)}
+                    />
+                </Link>
+            );
+        else return null;
     }
 
     handleClick(book) {

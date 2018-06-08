@@ -8,6 +8,7 @@ import Wishlist from "./features/wishlist/Wishlist";
 import Route from "react-router-dom/es/Route";
 import createBrowserHistory from "history/es/createBrowserHistory";
 import BooksCollection from "./services/BooksCollection";
+import WishlistCollection from "./services/WishlistCollection";
 
 
 const history = createBrowserHistory({
@@ -24,7 +25,6 @@ export default class App extends Component {
             books: [],
             routeId: 0,
             bookToBeSearched: '',
-            wishlist: [],
             category: '',
             bookAdded: [],
             addNewBookModalStatus: '',
@@ -53,9 +53,7 @@ export default class App extends Component {
             this.setState({
                 books: res
             })
-
         });
-
     }
 
     onNewBookAdded(book) {
@@ -161,9 +159,6 @@ export default class App extends Component {
                                render={(props) =>
                                    <Wishlist
                                        {...props}
-                                       wishlist={this.state.wishlist}
-                                       history={history}
-                                       allBooks={this.state.books}
                                    />
                                }
                         />

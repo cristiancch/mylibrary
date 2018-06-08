@@ -11,6 +11,12 @@ export default class BookModel {
         this.bookCover = book.cover;
         this.bookReadStatus = book.readedStatus;
         this.wishlistId = book.wishlistId;
+        this.username = book.username;
+        this.users = book.users;
+    }
+
+    get bookUsers() {
+        return this.users;
     }
 
     get id() {
@@ -80,6 +86,10 @@ export default class BookModel {
 
     set readedStatus(status) {
         this.bookReadStatus = status;
+    }
+
+    set bookUsers(users) {
+        this.users = users;
     }
 
 }

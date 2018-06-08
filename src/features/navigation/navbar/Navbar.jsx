@@ -35,7 +35,7 @@ export default class Navbar extends React.Component {
             let user = JSON.parse(json);
             if (user.userUsername) {
                 this.setState({
-                    loggedUser: user.userUsername,
+                    loggedUser: user.userLastname,
                     displaySignUp: false
                 });
             }
@@ -76,7 +76,7 @@ export default class Navbar extends React.Component {
                 if (user.userUsername) {
                     console.log('username: ', user.userUsername);
                     this.setState({
-                        loggedUser: user.userUsername,
+                        loggedUser: user.userLastname,
                     });
                 }
             }
