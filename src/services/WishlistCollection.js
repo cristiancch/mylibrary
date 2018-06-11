@@ -85,26 +85,32 @@ export default class WishlistCollection {
 
         console.log('get wishlist');
 
-        this.getAllBooks().then((res) => {
-            let allBooks = res;
-            return this.getWishlist().then((res) => {
-                for (let book of res.data) {
-                    if (book.users) {
-                        for (let user of book.users) {
-                            if (user == username) {
-                                debugger;
-                                self.wholeWishlist = allBooks.filter(auxBook => {
-                                    if (auxBook.bookId === book.bookId) {
-                                        return book.id;
+        return new Promise((resolve, reject) => {
+            resolve(
+                this.getAllBooks().then((res) => {
+                    let allBooks = res;
+                    return this.getWishlist().then((res) => {
+                        for (let book of res.data) {
+                            if (book.users) {
+                                for (let user of book.users) {
+                                    if (user == username) {
+                                        //debugger;
+                                        let auxWishlist = allBooks.filter(auxBook => {
+                                            if (auxBook.bookId === book.bookId) {
+                                                return book.id;
+                                            }
+                                        });
+                                        self.wholeWishlist.push(auxWishlist);
                                     }
-                                });
+                                }
                             }
                         }
-                    }
-                }
-                return res.data;
-            });
-
+                        return self.wholeWishlist;
+                    });
+                })
+            );
+        }).then((res) => {
+            return res;
         });
     }
 

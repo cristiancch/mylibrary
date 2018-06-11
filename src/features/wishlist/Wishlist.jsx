@@ -2,6 +2,7 @@ import React from 'react';
 import Bookshelf from "../bookshelf/Bookshelf";
 import BooksCollection from "../../services/BooksCollection";
 import WishlistCollection from "../../services/WishlistCollection";
+import _ from 'lodash'
 
 export default class Wishlist extends React.Component {
     constructor(props) {
@@ -35,11 +36,16 @@ export default class Wishlist extends React.Component {
         const self = this;
 
         wishlistCollection.getBookFromWishlistByUsername(self.state.isUserLogged).then((res) => {
+            let auxWishlist = [];
+
+            res.forEach((book) => {
+                auxWishlist.push(book[0])
+            });
+
             console.log('get books from wishlist, this: ', res[0]);
             self.setState({
-                allBooksFromDB: res,
+                allBooksFromDB: auxWishlist,
             })
-
         });
     }
 
@@ -66,8 +72,12 @@ export default class Wishlist extends React.Component {
     }
 
     render() {
-        if (!this.state.isUserLogged) {
+        if (_.isEmpty(this.state.isUserLogged)) {
             return (<p>Must be logged in to see wishlist</p>)
+        }
+
+        if (!this.state.allBooksFromDB.length) {
+            return (<p>Empty wishlist!</p>)
         }
 
         return (
