@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from "react-router-dom/es/Link";
-import BooksCollection from "../../services/BooksCollection";
+import WishlistCollection from "../../services/WishlistCollection";
 
 export default class RemoveFromWishlistBtn extends React.Component {
 
@@ -18,8 +18,10 @@ export default class RemoveFromWishlistBtn extends React.Component {
         let localStorage = window.localStorage;
 
         if (localStorage.getItem('loggedUser')) {
+            let json = localStorage.getItem('loggedUser');
+            let user = JSON.parse(json);
             this.setState({
-                isUserLogged: localStorage.getItem('loggedUser')
+                isUserLogged: user
             });
         }
     }
@@ -40,8 +42,8 @@ export default class RemoveFromWishlistBtn extends React.Component {
 
     handleClick(book) {
         console.log('book to be deleted: ', book);
-        let booksCollection = new BooksCollection();
-        booksCollection.removeBookFromWishlist(book);
+        let wishlistCollection = new WishlistCollection();
+        wishlistCollection.removeBookFromWishlist(book, this.state.isUserLogged);
         this.props.bookRemovedFromWishlist(book);
     }
 }

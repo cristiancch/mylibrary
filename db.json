@@ -138,21 +138,6 @@
       "id": 9
     },
     {
-      "bookId": 2,
-      "users": [
-        "test"
-      ],
-      "id": 19
-    },
-    {
-      "bookId": 0,
-      "users": [
-        "test",
-        "cristian.chiorescu"
-      ],
-      "id": 20
-    },
-    {
       "bookId": 6,
       "users": [
         "cristian.chiorescu"
@@ -160,18 +145,64 @@
       "id": 21
     },
     {
+      "bookId": 8,
+      "users": [
+        "test"
+      ],
+      "id": 25
+    },
+    {
+      "users": [
+        "cristian.chiorescu"
+      ],
+      "id": 27
+    },
+    {
+      "users": [
+        "cristian.chiorescu"
+      ],
+      "id": 28
+    },
+    {
       "bookId": 11,
       "users": [
         "cristian.chiorescu"
       ],
-      "id": 22
+      "id": 29
+    },
+    {
+      "bookId": 6,
+      "users": [
+        "cristian.chiorescu",
+        "test"
+      ],
+      "id": 31
+    },
+    {
+      "bookId": 0,
+      "users": [],
+      "id": 32
+    },
+    {
+      "bookId": 0,
+      "users": [
+        "test"
+      ],
+      "id": 33
     },
     {
       "bookId": 7,
       "users": [
         "cristian.chiorescu"
       ],
-      "id": 23
+      "id": 34
+    },
+    {
+      "bookId": 7,
+      "users": [
+        "cristian.chiorescu"
+      ],
+      "id": 35
     }
   ],
   "users": [

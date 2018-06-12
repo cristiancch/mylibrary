@@ -16,7 +16,6 @@ export default class Wishlist extends React.Component {
     }
 
     componentDidMount() {
-        console.log('wishlist did mount');
         let localStorage = window.localStorage;
 
         let json = localStorage.getItem('loggedUser');
@@ -41,8 +40,6 @@ export default class Wishlist extends React.Component {
             res.forEach((book) => {
                 auxWishlist.push(book[0])
             });
-
-            console.log('get books from wishlist, this: ', res[0]);
             self.setState({
                 allBooksFromDB: auxWishlist,
             })
@@ -62,12 +59,22 @@ export default class Wishlist extends React.Component {
     }
 
     onBookRemovedInWishlist(book) {
-        console.log('Book deleted (Wishlist): ', book);
+
+        debugger;
         let wishlistCollection = new WishlistCollection();
-        wishlistCollection.getWishlist().then((res) => {
-            this.setState({
-                allBooksFromDB: res
+
+        const self = this;
+        wishlistCollection.getBookFromWishlistByUsername(self.state.isUserLogged).then((res) => {
+
+            debugger;
+            let auxWishlist = [];
+
+            res.forEach((book) => {
+                auxWishlist.push(book[0])
             });
+            self.setState({
+                allBooksFromDB: auxWishlist,
+            })
         });
     }
 

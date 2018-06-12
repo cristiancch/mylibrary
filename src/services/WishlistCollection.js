@@ -13,7 +13,6 @@ export default class WishlistCollection {
     addBookToWishlistDB(bookId, username) {
 
         this.getWishlistByBookId(bookId).then((res) => {
-
             let users = res[0].users;
             let wishlistId = res[0].id;
 
@@ -26,7 +25,8 @@ export default class WishlistCollection {
             wishlistAux.users = users;
             let wishlistModel = new WishlistModel(wishlistAux);
 
-            this.removeBookFromWishlist(wishlistId);
+            // TODO implement removeBookFromWishlistByBookId
+            this.removeBookFromWishlistByBookId(bookId);
 
             return new Promise((resolve, reject) => {
                 resolve(
@@ -44,6 +44,16 @@ export default class WishlistCollection {
             })
         });
 
+    }
+
+    removeBookFromWishlistByBookId(bookId) {
+        fetch(`http://localhost:3000/wishlist?bookId=${bookId}`, {
+            "headers": {
+                "Accept": "application/json",
+                "Content-type": "application/json"
+            },
+            "method": "DELETE"
+        }).then((res) => console.log(res));
     }
 
     getWishlistByBookId(bookId) {
@@ -69,22 +79,54 @@ export default class WishlistCollection {
         });
     }
 
-    removeBookFromWishlist(wishlistId) {
-        fetch(`http://localhost:3000/wishlist/${wishlistId}`, {
-            "headers": {
-                "Accept": "application/json",
-                "Content-type": "application/json"
-            },
-            "method": "DELETE"
-        }).then((res) => console.log(res));
+    removeBookFromWishlist(book, user) {
+        console.log('Book: ', book.bookId, ' which belongs to user ', user.userUsername);
+        this.getWishlistByBookId(book.bookId).then((res) => {
+            let users = res[0].users;
+
+            let index = users.indexOf(user.userUsername);
+            if (index !== -1)
+                users.splice(index, 1);
+
+            let wishlistAux = {};
+            wishlistAux.id = book.bookId;
+            wishlistAux.users = users;
+
+            let wishlistModel = new WishlistModel(wishlistAux);
+            this.getWishlistByBookId(book.bookId).then((res) => {
+                let wishlistId = res[0].id;
+                fetch(`http://localhost:3000/wishlist/${wishlistId}`, {
+                    "headers": {
+                        "Accept": "application/json",
+                        "Content-type": "application/json"
+                    },
+                    "method": "DELETE"
+                }).then((res) => {
+                    return new Promise((resolve, reject) => {
+                        resolve(
+                            fetch('http://localhost:3000/wishlist', {
+                                "body": JSON.stringify(wishlistModel),
+                                "headers": {
+                                    "Accept": "application/json",
+                                    "Content-type": "application/json"
+                                },
+                                "method": "POST"
+                            })
+                        );
+                    }).then((res) => {
+                        console.log('Book added to DB, status: ', res);
+                    })
+                });
+
+            });
+
+        });
     }
+
 
     getBookFromWishlistByUsername(username) {
 
         const self = this;
-
-        console.log('get wishlist');
-
         return new Promise((resolve, reject) => {
             resolve(
                 this.getAllBooks().then((res) => {
@@ -94,7 +136,6 @@ export default class WishlistCollection {
                             if (book.users) {
                                 for (let user of book.users) {
                                     if (user == username) {
-                                        //debugger;
                                         let auxWishlist = allBooks.filter(auxBook => {
                                             if (auxBook.bookId === book.bookId) {
                                                 return book.id;

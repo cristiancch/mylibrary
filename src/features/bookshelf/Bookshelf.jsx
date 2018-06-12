@@ -20,7 +20,6 @@ export default class Bookshelf extends React.Component {
     }
 
     render() {
-        console.log('render in bookshelf: ', this.props.books);
         return (
             <nav className="allCards">
                 <h2>AllCards</h2>
