@@ -3,6 +3,9 @@ import './AddNewBook.scss';
 import Modal from 'react-modal';
 import {addToDB} from "../../helpers/jsonServerTransformer";
 import ErrorMessage from "./ErrorMessage";
+import WishlistModel from "../../services/WishlistModel";
+import WishlistCollection from "../../services/WishlistCollection";
+import BooksCollection from "../../services/BooksCollection";
 
 Modal.setAppElement(document.getElementById('root'));
 
@@ -41,7 +44,10 @@ export default class AddNewBook extends React.Component {
             bookCategoryError: false,
             bookCoverError: true,
 
-            sendValuesPressed: false
+            sendValuesPressed: false,
+
+            userLogged: null,
+            allBooksFromDB: []
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -57,6 +63,25 @@ export default class AddNewBook extends React.Component {
 
     componentDidMount() {
         window.addEventListener('keyup', this.handleKeyUp, false);
+
+        let localStorage = window.localStorage;
+
+        let json = localStorage.getItem('loggedUser');
+
+        if (json) {
+            let user = JSON.parse(json);
+            this.setState({
+                userLogged: user
+            })
+        }
+
+        let booksCollection = new BooksCollection();
+
+        booksCollection.getAllBooks().then((res) => {
+            this.setState({
+                allBooksFromDB: res
+            })
+        });
     }
 
     componentWillUnmount() {
@@ -80,7 +105,7 @@ export default class AddNewBook extends React.Component {
     openModal() {
         this.setState({
             modalIsOpen: true
-        })
+        });
     }
 
     closeModal(book) {
@@ -113,7 +138,7 @@ export default class AddNewBook extends React.Component {
             bookISBNError: false,
             bookCategoryError: false,
             bookCoverError: true
-        })
+        });
     }
 
     handleInputChange(event) {
@@ -156,11 +181,24 @@ export default class AddNewBook extends React.Component {
             sendValuesPressed: true
         });
 
+
+        let wishlist = {};
+        wishlist.id = book.id;
+        wishlist.users = [];
+
+        let wishlistModel = new WishlistModel(wishlist);
+
+        debugger;
+        let wishlistCollection = new WishlistCollection();
+
+        let self = this;
+        // TODO add the book also to the wishlist
+        // TODO at resolve, axios, put eject
         if (this.formValidation() && book.title) {
             addToDB(book).then((res) => {
-                // console.log('Response: ', res);
                 this.closeModal(book);
             });
+            wishlistCollection.addNewBookToWishlistDB(book.id, this.state.userLogged.userUsername);
         }
     }
 
@@ -170,7 +208,7 @@ export default class AddNewBook extends React.Component {
         const {isOpen} = this.state.modalIsOpen;
         this.setState({
             modalIsOpen: !isOpen
-        })
+        });
     }
 
     onImageUpload(image) {
@@ -182,7 +220,7 @@ export default class AddNewBook extends React.Component {
             this.setState({
                 bookCover: fileContent,
                 bookCoverError: false
-            })
+            });
         };
 
     }
@@ -213,7 +251,7 @@ export default class AddNewBook extends React.Component {
         // TODO array method except map
 
         return stateObj.every((aux) => {
-            return aux === false
+            return aux === false;
         });
     }
 

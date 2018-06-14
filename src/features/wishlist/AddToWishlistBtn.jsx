@@ -1,7 +1,5 @@
 import React from 'react';
 import "./Wishlist.scss";
-import BooksCollection from "../../services/BooksCollection";
-import WishlistModel from "../../services/WishlistModel";
 import WishlistCollection from "../../services/WishlistCollection";
 
 

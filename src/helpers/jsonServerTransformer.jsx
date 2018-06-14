@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import axios from "axios/index";
 
@@ -14,7 +15,7 @@ export function updateDB(book) {
 }
 
 export function addToDB(book) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         resolve(
             fetch('http://localhost:3000/books', {
                 "body": JSON.stringify(book),

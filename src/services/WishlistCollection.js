@@ -1,22 +1,20 @@
 import axios from "axios/index";
 import WishlistModel from "./WishlistModel";
-import BookModel from "./BookModel";
 import BooksCollection from "./BooksCollection";
 
 export default class WishlistCollection {
 
     constructor() {
         this.wholeWishlist = [];
-        this.allBooks = []
+        this.allBooks = [];
     }
 
     addBookToWishlistDB(bookId, username) {
-
         this.getWishlistByBookId(bookId).then((res) => {
             let users = res[0].users;
-            let wishlistId = res[0].id;
+            //let wishlistId = res[0].id;
 
-            if (users.indexOf(username) == -1) {
+            if (users.indexOf(username) === -1) {
                 users.push(username);
             }
 
@@ -28,7 +26,7 @@ export default class WishlistCollection {
             // TODO implement removeBookFromWishlistByBookId
             this.removeBookFromWishlistByBookId(bookId);
 
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 resolve(
                     fetch('http://localhost:3000/wishlist', {
                         "body": JSON.stringify(wishlistModel),
@@ -41,7 +39,7 @@ export default class WishlistCollection {
                 );
             }).then((res) => {
                 console.log('Book added to DB, status: ', res);
-            })
+            });
         });
 
     }
@@ -57,23 +55,23 @@ export default class WishlistCollection {
     }
 
     getWishlistByBookId(bookId) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             resolve(
                 axios.get(`http://localhost:3000/wishlist?bookId=${bookId}`)
             );
         }).then(res => {
-            return res.data
+            return res.data;
         });
     }
 
     getAllBooks() {
         let booksCollection = new BooksCollection();
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             resolve(
                 booksCollection.getAllBooks().then((res) => {
                     return res;
                 })
-            )
+            );
         }).then((res) => {
             return res;
         });
@@ -85,8 +83,9 @@ export default class WishlistCollection {
             let users = res[0].users;
 
             let index = users.indexOf(user.userUsername);
-            if (index !== -1)
+            if (index !== -1) {
                 users.splice(index, 1);
+            }
 
             let wishlistAux = {};
             wishlistAux.id = book.bookId;
@@ -101,8 +100,8 @@ export default class WishlistCollection {
                         "Content-type": "application/json"
                     },
                     "method": "DELETE"
-                }).then((res) => {
-                    return new Promise((resolve, reject) => {
+                }).then(() => {
+                    return new Promise((resolve) => {
                         resolve(
                             fetch('http://localhost:3000/wishlist', {
                                 "body": JSON.stringify(wishlistModel),
@@ -115,7 +114,7 @@ export default class WishlistCollection {
                         );
                     }).then((res) => {
                         console.log('Book added to DB, status: ', res);
-                    })
+                    });
                 });
 
             });
@@ -127,7 +126,7 @@ export default class WishlistCollection {
     getBookFromWishlistByUsername(username) {
 
         const self = this;
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             resolve(
                 this.getAllBooks().then((res) => {
                     let allBooks = res;
@@ -157,5 +156,24 @@ export default class WishlistCollection {
 
     getWishlist() {
         return axios.get('http://localhost:3000/wishlist');
+    }
+
+    addNewBookToWishlistDB(book, userId) {
+        let wishlistAux = {};
+        wishlistAux.id = book;
+        wishlistAux.users = userId;
+
+        let wishlistModel = new WishlistModel(wishlistAux);
+
+        fetch('http://localhost:3000/wishlist', {
+            "body": JSON.stringify(wishlistModel),
+            "headers": {
+                "Accept": "application/json",
+                "Content-type": "application/json"
+            },
+            "method": "POST"
+        }).then((res) => {
+            console.log(res);
+        })
     }
 }

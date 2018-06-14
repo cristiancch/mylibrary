@@ -1,15 +1,12 @@
 import React, {Component} from 'react';
 import Navbar from 'features/navigation/navbar/Navbar';
 import BookDetails from 'features/book-details/BookDetails';
-import axios from "axios/index";
 import Switch from "react-router-dom/es/Switch";
 import Bookshelf from "./features/bookshelf/Bookshelf";
 import Wishlist from "./features/wishlist/Wishlist";
 import Route from "react-router-dom/es/Route";
 import createBrowserHistory from "history/es/createBrowserHistory";
 import BooksCollection from "./services/BooksCollection";
-import WishlistCollection from "./services/WishlistCollection";
-
 
 const history = createBrowserHistory({
         basename: "/allBooks",
@@ -54,6 +51,10 @@ export default class App extends Component {
                 books: res
             })
         });
+
+        console.log('Spread operator on String:');
+        let aux = 'Cristi';
+        console.log(...aux);
     }
 
     onNewBookAdded(book) {

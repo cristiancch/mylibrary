@@ -8,7 +8,7 @@ export default class BooksCollection {
     }
 
     getBooksFromDB() {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             resolve(
                 axios.get('http://localhost:3000/books')
             );
@@ -32,7 +32,7 @@ export default class BooksCollection {
     }
 
     getBookById(id) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             resolve(
                 axios.get(`http://localhost:3000/books/${id}`)
             );
