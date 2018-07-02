@@ -5,16 +5,17 @@ import Switch from "react-router-dom/es/Switch";
 import Bookshelf from "./features/bookshelf/Bookshelf";
 import Wishlist from "./features/wishlist/Wishlist";
 import Route from "react-router-dom/es/Route";
-import createBrowserHistory from "history/es/createBrowserHistory";
+//import createBrowserHistory from "history/es/createBrowserHistory";
 import BooksCollection from "./services/BooksCollection";
+import {connect} from 'react-redux';
 
-const history = createBrowserHistory({
+/*const history = createBrowserHistory({
         basename: "/allBooks",
         forceRefresh: true,
     }
-);
+);*/
 
-export default class App extends Component {
+class App extends Component {
 
     constructor(props) {
         super(props);
@@ -35,27 +36,26 @@ export default class App extends Component {
         this.updateAddedNewBookStatus = this.updateAddedNewBookStatus.bind(this);
     }
 
-    componentWillMount() {
+    /*componentWillMount() {
         let bookCollection = new BooksCollection();
         bookCollection.getAllBooks().then((res) => {
             this.setState({
                 books: res
             })
         });
-    }
+    }*/
 
-    componentDidMount() {
+    /*componentDidMount() {
         let bookCollection = new BooksCollection();
         bookCollection.getAllBooks().then((res) => {
             this.setState({
                 books: res
             })
         });
-
-        console.log('Spread operator on String:');
-        let aux = 'Cristi';
-        console.log(...aux);
-    }
+        /!* console.log('Spread operator on String:');
+         let aux = 'Cristi';
+         console.log(...aux);*!/
+    }*/
 
     onNewBookAdded(book) {
         this.setState({
@@ -107,7 +107,7 @@ export default class App extends Component {
                     onSearchBook={this.searchBook}
                     onBookCategory={this.getBookCategory}
                     onStyleModalOpened={this.getAddBookModalStatus}
-                    allBooks={this.state.books}
+                    allBooks={this.props.allBooksFromDB}
                     history={history}
                     wasAddedNewBookStatus={this.updateAddedNewBookStatus}
                 />
@@ -117,7 +117,7 @@ export default class App extends Component {
                                render={(props) =>
                                    <Bookshelf
                                        {...props}
-                                       books={this.state.books}
+                                       books={this.props.allBooksFromDB}
                                        bookToSearch={this.state.bookToBeSearched}
                                        addNewBookModalStatus={this.state.addNewBookModalStatus}
                                        history={history}
@@ -128,7 +128,7 @@ export default class App extends Component {
                                render={(props) =>
                                    <Bookshelf
                                        {...props}
-                                       books={this.state.books}
+                                       books={this.props.allBooksFromDB}
                                        bookToSearch={this.state.bookToBeSearched}
                                        addNewBookModalStatus={this.state.addNewBookModalStatus}
                                        history={history}
@@ -150,7 +150,7 @@ export default class App extends Component {
                                render={(props) =>
                                    <BookDetails
                                        {...props}
-                                       books={this.state.books}
+                                       books={this.props.allBooksFromDB}
                                        id={props.match.params.id}
                                        toSearch={this.state.bookToBeSearched}
                                        history={history}
@@ -168,6 +168,15 @@ export default class App extends Component {
             </section>
         );
     }
-
-
 }
+
+function mapStateToProps(state) {
+    return {
+        allBooksFromDB: state.books
+    };
+}
+
+export default connect(mapStateToProps)(App);
+
+
+

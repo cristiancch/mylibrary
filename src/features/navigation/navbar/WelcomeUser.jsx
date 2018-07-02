@@ -26,17 +26,21 @@ export default class WelcomeUser extends React.Component {
         if (!this.props.show) {
             if (this.props.username) {
                 return (
-                    <div>
-                        <button
-                            className="welcomeUser">
-                            {this.props.username}
-                        </button>
-                        <button
-                            className="welcomeUser"
-                            onClick={this.handleLogout}>
-                            Logout
-                        </button>
-                    </div>
+                    <ul className="nav__ul">
+                        <li className="nav__li">
+                            <button
+                                className="welcomeUser">
+                                {this.props.username}
+                            </button>
+                        </li>
+                        <li className="nav__li">
+                            <button
+                                className="user__logout"
+                                onClick={this.handleLogout}>
+                                Logout
+                            </button>
+                        </li>
+                    </ul>
                 );
             }
             return null;

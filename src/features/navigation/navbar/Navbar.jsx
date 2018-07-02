@@ -116,11 +116,13 @@ export default class Navbar extends React.Component {
                                 show={this.state.displaySignUp}
                             />
                         </li>
-                        <WelcomeUser
-                            onLogout={this.onLogout}
-                            username={this.state.loggedUser}
-                            show={this.state.displaySignUp}
-                        />
+                        <li className="nav__li">
+                            <WelcomeUser
+                                onLogout={this.onLogout}
+                                username={this.state.loggedUser}
+                                show={this.state.displaySignUp}
+                            />
+                        </li>
                         <SearchBar onSearchTermChanged={this.bookSearch}/>
                     </ul>
                 </nav>

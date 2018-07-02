@@ -1,9 +1,10 @@
+/* eslint-disable no-undef */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const autoprefixer = require('autoprefixer');
 const precss = require('precss');
-
+const webpack = require('webpack');
 const paths = {
     DIST: path.resolve(__dirname, 'dist'),
     SRC: path.resolve(__dirname, 'src'),
@@ -21,6 +22,7 @@ module.exports = {
         modules: [
             path.resolve(__dirname, 'src'),
             path.resolve(__dirname, 'node_modules'),
+            'node_modules',
         ],
         extensions: ['.js', '.jsx', '.scss', '.jpg', '.jpeg', '.png'],
     },
@@ -32,6 +34,12 @@ module.exports = {
             inject: 'body',
         }),
         new ExtractTextPlugin("styles.css"),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery',
+            Popper: ['popper.js', 'default'],
+        })
     ],
     module: {
         rules: [

@@ -219,6 +219,13 @@
       "bookId": 12,
       "users": "test",
       "id": 36
+    },
+    {
+      "bookId": 8,
+      "users": [
+        "test"
+      ],
+      "id": 37
     }
   ],
   "users": [

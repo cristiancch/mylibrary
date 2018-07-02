@@ -37,12 +37,21 @@
 }
 
 .welcomeUser {
-  float: left;
-  margin: 0;
   border: none;
   display: block;
+  border-right: 1px solid #bbb;
   color: white;
-  text-align: center;
+  font-size: 21px;
+  padding: 16px 16px;
+  text-decoration: none;
+  background-color: #60656F;
+}
+
+.user__logout {
+  border: none;
+  display: block;
+  border-left: 1px solid #bbb;
+  color: white;
   font-size: 21px;
   padding: 16px 16px;
   text-decoration: none;
@@ -190,8 +199,5 @@ h2 {
 @media screen and (min-width: 1600px) {
   .navbar {
     width: 1170px;
-  }
-  .welcomeUser {
-    margin-left: 33%;
   }
 }
